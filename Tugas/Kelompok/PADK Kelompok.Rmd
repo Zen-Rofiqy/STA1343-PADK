@@ -1,0 +1,129 @@
+---
+title: "PADK Kelompok 1"
+output: html_document
+date: "2023-09-07"
+---
+
+```{r}
+path <- function() gsub  ( "\\\\",  "/",  readClipboard ()  )
+#Copy path, Panggil function di console
+#Copy r path, paste ke var yang diinginkan
+```
+
+```{r setup, include=FALSE, echo=FALSE}
+require("knitr")
+opts_knit$set(root.dir = "C:/Users/Fathan/Documents/Obsidian Vault/2. Kuliah/Smt 5/7. Pengantar Analisis Data Kategorik/Tukel")
+```
+
+```{r}
+#                      -=( Install & Load Package Function )=-
+install_load <- function (package1, ...)  {   
+
+   # convert arguments to vector
+   packages <- c(package1, ...)
+
+   # start loop to determine if each package is installed
+   for(package in packages){
+
+       # if package is installed locally, load
+       if(package %in% rownames(installed.packages()))
+          do.call('library', list(package))
+
+       # if package is not installed locally, download, then load
+       else {
+          install.packages(package)
+          do.call("library", list(package))
+       }
+   } 
+}
+```
+
+### Load Library
+
+```{r}
+install_load('readxl','coin','dplyr','ggplot2','car')
+```
+
+# Metode
+
+$$
+Z = \frac{T-\frac{n_1n_2}{2} }
+{\sqrt{\frac{n_1n_2(n_1+n_2+1)}{12} -
+\frac{n_1n_2(\Sigma t^3 - \Sigma t)}
+{12(n_1+n_2)(n_1+n_2-1)}
+}
+}
+$$
+
+$$
+Z.hitung(6.3744) > Z.tabel (1.64)
+$$
+
+### Load Data
+
+```{r}
+df <- read_excel("Data_PADK.xlsx", sheet = 2)
+str(df)
+df <- df %>% rename_all(~trimws(.))
+```
+
+```{r}
+L <- filter(df, JK == "L")
+P <- filter(df, JK == 'P')
+df$Tinggi <- as.numeric(df$Tinggi)
+df$JK <- factor(df$JK, levels = c("L", "P"))
+```
+
+# Eksplorasi Data
+
+```{r}
+par(mfrow=c(2,2))
+qqPlot(L$Tinggi, main = 'Q-Q Plot Tinggi Laki-Laki')
+qqPlot(P$Tinggi, main = 'Q-Q Plot Tinggi Perempuan')
+hist(L$Tinggi, main = 'Histogram Tinggi Laki-Laki')
+hist(P$Tinggi, main = 'Histogram Tinggi Perempuan')
+```
+
+### Uji Mann Whitney
+
+$$
+\begin{align*}
+H_0 &: \mu_1 = \mu_2 \\
+H_1 &: \mu_1 \neq \mu_2
+\end{align*}
+$$
+
+```{r}
+mw_test <- wilcox.test(Tinggi ~ JK, data = df)
+mw_test
+```
+
+```{r}
+df.sort <- df[order(df$Tinggi),]
+```
+
+```{r}
+df.sort$tinggi.ranked <- rank(df.sort$Tinggi, ties.method = 'average')
+L <- filter(df.sort, JK == 'L')
+P <- filter(df.sort, JK == 'P')
+```
+
+```{r}
+R1 <- sum(L$tinggi.ranked)
+R2 <- sum(P$tinggi.ranked)
+
+n1 <- length(L$tinggi.ranked)
+n2 <- length(P$tinggi.ranked)
+
+U1 <- R1 - (n1*(n1+1)/2)
+U2 <- R2 - (n2*(n2+1)/2)
+```
+
+```{r}
+U <- max(U1, U2)
+U
+```
+
+```{r}
+mw_test$statistic
+```

@@ -1,0 +1,8 @@
+{
+	"nodes":[
+		{"type":"text","text":"# Kuliah 1\nDosen : Pak Farit Mochamad Afendi\nTanggal : 24 Agustus 2023","id":"3d6510709479eb62","x":-208,"y":-408,"width":348,"height":128},
+		{"id":"66e506f6fe6b33d4","x":300,"y":-680,"width":362,"height":127,"type":"text","text":"# DRIVE PRAKTIKUM\nhttp://ipb.link/sta1343padk-2023"},
+		{"type":"text","text":"# PERTEMUAN 02\nDosen : Pak Farit Mochamad Afendi\nTanggal : 31 Agustus 2023","id":"2961ab86f867daa8","x":380,"y":-408,"width":348,"height":128}
+	],
+	"edges":[]
+}
