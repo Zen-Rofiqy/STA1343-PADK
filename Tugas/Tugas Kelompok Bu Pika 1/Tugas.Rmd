@@ -73,7 +73,7 @@ path <- function(){
 
 ## Soal
 
-![](images/Screenshot 2023-11-17 061312.png)
+![](images/Screenshot%202023-11-17%20061312.png)
 
 ## Data Entry
 
@@ -141,11 +141,11 @@ model <- glm(LungCancer ~ Smoking + City, data = data2, family = binomial)
 summary(model)
 ```
 
-Bisa dilihat pada bagian ![](images/Screenshot 2023-11-17 092427.png){width="134"} bahwa nilai **dugaan parameter regresi logistik berganda untuk Peubah Smoking** adalah sekitar $0.777062$.
+Bisa dilihat pada bagian ![](images/Screenshot%202023-11-17%20092427.png){width="134"} bahwa nilai **dugaan parameter regresi logistik berganda untuk Peubah Smoking** adalah sekitar $0.777062$.
 
-Sehingga jawaban yang tepat adalah :
+> Sehingga jawaban yang tepat adalah :
 
-![](images/Screenshot 2023-11-17 062616.png){width="305"}
+![](images/Screenshot%202023-11-17%20062616.png){width="305"}
 
 ## No 2.
 
@@ -169,9 +169,9 @@ Anova(model, type="II", test.statistic="Wald")
 
 Lalu nilai **Statistik Uji Wald** nya sebesar $269.09$ dan *p-value* nya sangat kecil yakni **kurang dari** $2.2\times10^{-16}$.
 
-Sehingga jawaban yang tepat adalah
+> Sehingga jawaban yang tepat adalah
 
-![](images/Screenshot 2023-11-17 065015.png){width="355"}
+![](images/Screenshot%202023-11-17%20065015.png){width="355"}
 
 ## **No 3.**
 
@@ -183,9 +183,9 @@ rasio.odds[1:2]
 
 Bisa dilihat bahwa berdasarkan nilai rasio odds nya, kelompok yang memiliki kecenderungan lebih tinggi terkena kanker paru-paru adalah kelompok yang **merokok**. Yakni $2.175$ kali lebih besar dari pada yang tidak **merokok.**
 
-Sehingga jawaban yang tepat adalah
+> Sehingga jawaban yang tepat adalah
 
-![](images/Screenshot 2023-11-17 065300.png){width="325"}
+![](images/Screenshot%202023-11-17%20065300.png){width="325"}
 
 ## **No 4.**
 
@@ -198,13 +198,13 @@ summary(model2)
 
 Bisa dilihat pada bagian
 
-![](images/Screenshot 2023-11-17 065957.png){width="342"}
+![](images/Screenshot%202023-11-17%20065957.png){width="342"}
 
 Bahwa **Kota yang memiliki pengaruh yang signifikan** adalah kota **Taiyuan.**
 
-Sehingga jawaban yang tepat adalah
+> Sehingga jawaban yang tepat adalah
 
-![](images/Screenshot 2023-11-17 070120.png){width="289"}
+![](images/Screenshot%202023-11-17%20070120.png){width="289"}
 
 ## **No 5.**
 
@@ -223,11 +223,11 @@ hoslem.test(model$y, fitted(model))
 predicted_probabilities <- predict(model, type = "response")
 ```
 
-Didapatkan *Khi-kuadrat* sebesar $4.8903\times10^{-25}$. Nilainya sangat kecil, sehingga dapat dinyatakan **kurang dari** $0.001$. Didapat pula *p-value* yang besar yakni sebesar $1$. Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
+Didapatkan *Khi-kuadrat* sebesar $1.388$. Nilainya sangat kecil, sehingga dapat dinyatakan **kurang dari** $0.001$. Didapat pula *p-value* yang besar yakni sebesar $0.9944$. Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
 
-Sehingga jawaban yang tepat adalah
+> Sehingga jawaban yang tepat adalah
 
-![](images/Screenshot 2023-11-17 075748-01.png){width="347"}
+![](images/Screenshot 2023-11-17 100615.png){width="314"}
 
 ## **No 6.**
 
@@ -274,9 +274,9 @@ datatable(log)
 
 Diperoleh nilai $log{(\text{L}_0^{-2})}$ adalah sebesar $11663.37$. Lalu $log{(\text{L}_1^{-2})}$ bernilai $11357.67$. Dan $log{(\text{L}_0-\text{L}_1)^{-2}}$ sebesar $305.7$.
 
-Sehingga jawaban yang tepat adalah
+> Sehingga jawaban yang tepat adalah
 
-![](images/Screenshot 2023-11-17 081709.png){width="381"}
+![](images/Screenshot%202023-11-17%20081709.png){width="381"}
 
 # Hasil software lain {.tabset}
 
@@ -332,55 +332,63 @@ RUN;
 
 ### Output
 
-![](images/Screenshot 2023-11-17 084758.png)
+![](images/Screenshot%202023-11-17%20084758.png)
 
 ### Jawab Soal
 
-#### No 1. 
+#### No 1.
 
 > Hitunglah **dugaan parameter** regresi logistik berganda untuk **Peubah Smoking**
 
-![](images/Screenshot 2023-11-17 085240.png){width="354"}
+![](images/Screenshot%202023-11-17%20085240.png){width="354"}
 
 Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7704$.
 
-Sehingga jawaban yang tepat adalah :
+> Sehingga jawaban yang tepat adalah
 
-![](images/Screenshot 2023-11-17 062616.png){width="305"}
+![](images/Screenshot%202023-11-17%20062616.png){width="305"}
 
-#### No 2. 
+#### No 2.
 
 > **Nilai odds, p-value, dan Statistik Uji Wald** pada peubah `Smoking`
 
-![](images/Screenshot 2023-11-17 085802.png){width="247"}
+![](images/Screenshot%202023-11-17%20085802.png){width="247"}
 
 Didapatkan **Nilai odds** pada peubah `Smoking` sebesar $2.161$.
 
-![](images/Screenshot 2023-11-17 090052.png){width="260"}
+![](images/Screenshot 2023-11-17 094001.png){width="262"}
 
-Sehingga jawaban yang tepat adalah
+Didapatkan **Statistik Uji Wald** pada peubah `Smoking` sebesar $274.4587$. Dan **p-value** nya sangat kecil yakni kurang dari $0.0001$.
 
-![](images/Screenshot 2023-11-17 065015.png){width="355"}
+> Sehingga jawaban yang tepat adalah
 
-#### No 3. 
+![](images/Screenshot%202023-11-17%20065015.png){width="355"}
+
+#### No 3.
 
 > **Rasio Odds** Lung Cancer
 
-Sehingga jawaban yang tepat adalah
+![](images/Screenshot%202023-11-17%20085802.png){width="247"}
 
-![](images/Screenshot 2023-11-17 065300.png){width="325"}
+Seperti yang sudah dijelaskan pada No 2. **Nilai odds** pada peubah `Smoking` sebesar $2.161$. Yang berarti kelompok yang memiliki kecenderungan lebih tinggi terkena kanker paru-paru adalah kelompok yang **merokok.** Yakni $2.161$ kali lebih besar dari pada yang tidak **merokok.**
 
-#### No 4. 
+> Sehingga jawaban yang tepat adalah
+
+![](images/Screenshot%202023-11-17%20065300.png){width="325"}
+
+#### No 4.
 
 > **Kota** yang memilikipengaruh yang **signifikan**
 
-Sehingga jawaban yang tepat adalah
+Sayangnya saya blm tau caranya menampilkan ini di SAS. 🙏
 
-![](images/Screenshot 2023-11-17 070120.png){width="289"}
-
-#### No 5. 
+#### No 5.
 
 > Lakukan **Uji kebaikan suai Hosmer** and **Lemeshow** terhadap model yang di tentukan. Tentukan *khi-kuadrat, p-value, keputusan, dan kesimpulan*.
+
+![](images/Screenshot 2023-11-17 100311.png){width="236"}
+
+Didapatkan **nilai *khi-kuadrat*** sebesar $1.6062$. Dan **p-value** sebesar $0.9521$.
 
 **Hipotesis**
 
@@ -388,11 +396,13 @@ Sehingga jawaban yang tepat adalah
 >
 > $H_1$ : Model Tidak cocok
 
-Sehingga jawaban yang tepat adalah
+Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
 
-![](images/Screenshot 2023-11-17 075748-01.png){width="347"}
+> Sehingga jawaban yang tepat adalah
 
-#### No 6. 
+![](images/Screenshot 2023-11-17 100615.png){width="314"}
+
+#### No 6.
 
 > Jika ingin **diuji** apakah model dengan kovariat city dan smoking **(L1) lebih baik** daripada model dengan hanya intersep saja **(L0)**, maka dilakukan **LR test**.
 
@@ -404,6 +414,6 @@ Sehingga jawaban yang tepat adalah
 
 Sehingga jawaban yang tepat adalah
 
-![](images/Screenshot 2023-11-17 081709.png){width="381"}
+![](images/Screenshot%202023-11-17%20081709.png){width="381"}
 
 ## Minitab
