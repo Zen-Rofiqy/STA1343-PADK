@@ -278,9 +278,13 @@ Sehingga jawaban yang tepat adalah
 
 ![](images/Screenshot 2023-11-17 081709.png){width="381"}
 
-# Hasil software lain
+# Hasil software lain {.tabset}
 
 ## SAS
+
+[File.sas](https://github.com/Zen-Rofiqy/STA1343-PADK/blob/main/Tugas/Tugas%20Kelompok%20Bu%20Pika%201/%5BPADK%5D%20Regresi%20Logistik-Regresi%20Berganda.sas){.uri}
+
+### Code
 
 ```{r, tidy=FALSE, eval=FALSE, highlight=FALSE }
 DATA tugas; 
@@ -325,3 +329,29 @@ PROC LOGISTIC DATA = tugas descending; weight count;
 MODEL lungcancer = city smoking/rsquare lackfit;
 RUN;
 ```
+
+### Output
+
+![](images/Screenshot 2023-11-17 084758.png)
+
+### Jawab Soal
+
+#### No 1. 
+
+> Hitunglah **dugaan parameter** regresi logistik berganda untuk **Peubah Smoking**
+
+Sehingga jawaban yang tepat adalah :
+
+![](images/Screenshot 2023-11-17 062616.png){width="305"}
+
+#### No 2. 
+
+#### No 3. 
+
+#### No 4. 
+
+#### No 5. 
+
+#### No 6. 
+
+## Minitab
