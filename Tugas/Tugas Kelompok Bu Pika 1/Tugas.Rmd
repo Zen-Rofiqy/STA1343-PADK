@@ -175,6 +175,8 @@ datatable(no1)
 
 > **Nilai odds, p-value, dan Statistik Uji Wald** pada peubah Smoking
 
+### Rstudio
+
 ```{r}
 summary_model <- summary(model)
 rasio.odds <- exp(coef(model)) %>% round(.,3)
@@ -188,12 +190,12 @@ Didapat bahwa nilai Rasio odds pada peubah Smoking diperoleh sebesar $2.175$.
 
 ```{r message=FALSE, warning=FALSE}
 install_load('car')
-Anova(model, type="II", test.statistic="Wald")
+anova <- Anova(model, type="II", test.statistic="Wald"); anova
 ```
 
-Lalu nilai **Statistik Uji Wald** nya sebesar $269.09$ dan *p-value* nya sangat kecil yakni **kurang dari** $2.2\times10^{-16}$.
+Lalu nilai **Statistik Uji Wald** nya sebesar $275.988$ dan *p-value* nya sangat kecil yakni **kurang dari** $2.2\times10^{-16}$.
 
-> **Hasil** `SAS`
+### SAS
 
 ![](images/Screenshot%202023-11-17%20085802.png){width="247"}
 
@@ -202,6 +204,24 @@ Didapatkan **Nilai odds** pada peubah `Smoking` sebesar $2.161$.
 ![](images/Screenshot 2023-11-17 094001.png){width="262"}
 
 Didapatkan **Statistik Uji Wald** pada peubah `Smoking` sebesar $274.4587$. Dan **p-value** nya sangat kecil yakni kurang dari $0.0001$.
+
+### Minitab
+
+![](images/Screenshot 2023-11-17 113648.png)
+
+Didapatkan **Nilai odds** pada peubah `Smoking` sebesar $2.1751$.
+
+### Perbandingan
+
+```{r}
+no2 <- data.frame(R = c(rasio.odds[1:2][[2]], 
+                        anova$Chisq[1] %>% round(.,4),
+                        anova$`Pr(>Chisq)`[1] %>% sprintf("%.2e", .)),
+                  SAS = c(2.161, 274.4587, "<0.0001"), 
+                  MiniTab = c(2.1751, NA, NA))
+rownames(no2) <- c("Rasio Odds", "Chisq", "P-Value")
+datatable(no2)
+```
 
 > Sehingga jawaban yang tepat adalah
 
@@ -216,6 +236,8 @@ rasio.odds[1:2]
 ```
 
 Bisa dilihat bahwa berdasarkan nilai rasio odds nya, kelompok yang memiliki kecenderungan lebih tinggi terkena kanker paru-paru adalah kelompok yang **merokok**. Yakni $2.175$ kali lebih besar dari pada yang tidak **merokok.**
+
+Pada dua sofware lainnya memiliki kesimpulan yang sama walaupun nilainya cukup berbeda. Yakni pada **SAS** sebesar $2.161$ dan pada **Minitab** sebesar $2.1751$.
 
 > Sehingga jawaban yang tepat adalah
 
@@ -367,34 +389,6 @@ RUN;
 ### Output
 
 ![](images/Screenshot%202023-11-17%20084758.png)
-
-#### No 2.
-
-> **Nilai odds, p-value, dan Statistik Uji Wald** pada peubah `Smoking`
-
-![](images/Screenshot%202023-11-17%20085802.png){width="247"}
-
-Didapatkan **Nilai odds** pada peubah `Smoking` sebesar $2.161$.
-
-![](images/Screenshot 2023-11-17 094001.png){width="262"}
-
-Didapatkan **Statistik Uji Wald** pada peubah `Smoking` sebesar $274.4587$. Dan **p-value** nya sangat kecil yakni kurang dari $0.0001$.
-
-> Sehingga jawaban yang tepat adalah
-
-![](images/Screenshot%202023-11-17%20065015.png){width="355"}
-
-#### No 3.
-
-> **Rasio Odds** Lung Cancer
-
-![](images/Screenshot%202023-11-17%20085802.png){width="247"}
-
-Seperti yang sudah dijelaskan pada No 2. **Nilai odds** pada peubah `Smoking` sebesar $2.161$. Yang berarti kelompok yang memiliki kecenderungan lebih tinggi terkena kanker paru-paru adalah kelompok yang **merokok.** Yakni $2.161$ kali lebih besar dari pada yang tidak **merokok.**
-
-> Sehingga jawaban yang tepat adalah
-
-![](images/Screenshot%202023-11-17%20065300.png){width="325"}
 
 #### No 4.
 
