@@ -132,9 +132,11 @@ Bisa di cek bahwa. Jumlah data yang di transform sudah benar.
 
 # Jawab Soal
 
-## No 1.
+## No 1. {.tabset}
 
 > Hitunglah **dugaan parameter** regresi logistik berganda untuk **Peubah Smoking**
+
+### Rstudio
 
 ```{r}
 model <- glm(LungCancer ~ Smoking + City, data = data2, family = binomial)
@@ -143,17 +145,27 @@ summary(model)
 
 Bisa dilihat pada bagian ![](images/Screenshot%202023-11-17%20092427.png){width="134"} bahwa nilai **dugaan parameter regresi logistik berganda untuk Peubah Smoking** adalah sekitar $0.777062$.
 
-> Hasil SAS
+### SAS
 
 ![](images/Screenshot%202023-11-17%20085240.png){width="354"}
 
 Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7704$.
 
-> Hasil Minitab
+### **Minitab**
 
 ![](images/Screenshot 2023-11-17 113117.png){width="468"}
 
 Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7771$.
+
+### Perbandingan
+
+```{r}
+no1 <- data.frame(R = summary(model)[["coefficients"]]["SmokingYes",1] %>%
+                    round(.,4),
+                  SAS = 0.7704, 
+                  MiniTab = 0.7771)
+datatable(no1)
+```
 
 > Sehingga jawaban yang tepat adalah :
 
@@ -180,6 +192,16 @@ Anova(model, type="II", test.statistic="Wald")
 ```
 
 Lalu nilai **Statistik Uji Wald** nya sebesar $269.09$ dan *p-value* nya sangat kecil yakni **kurang dari** $2.2\times10^{-16}$.
+
+> **Hasil** `SAS`
+
+![](images/Screenshot%202023-11-17%20085802.png){width="247"}
+
+Didapatkan **Nilai odds** pada peubah `Smoking` sebesar $2.161$.
+
+![](images/Screenshot 2023-11-17 094001.png){width="262"}
+
+Didapatkan **Statistik Uji Wald** pada peubah `Smoking` sebesar $274.4587$. Dan **p-value** nya sangat kecil yakni kurang dari $0.0001$.
 
 > Sehingga jawaban yang tepat adalah
 
@@ -345,20 +367,6 @@ RUN;
 ### Output
 
 ![](images/Screenshot%202023-11-17%20084758.png)
-
-### Jawab Soal
-
-#### No 1.
-
-> Hitunglah **dugaan parameter** regresi logistik berganda untuk **Peubah Smoking**
-
-![](images/Screenshot%202023-11-17%20085240.png){width="354"}
-
-Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7704$.
-
-> Sehingga jawaban yang tepat adalah
-
-![](images/Screenshot%202023-11-17%20062616.png){width="305"}
 
 #### No 2.
 
