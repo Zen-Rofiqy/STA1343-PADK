@@ -409,3 +409,30 @@ Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0
 Sayangnya saya blm tau caranya menampilkan ini di SAS. 🙏
 
 ## Minitab
+
+### Import data
+
+![](images/Screenshot 2023-11-17 111453.png){width="220"}
+
+Dimana :
+
+-   `Cancer` = `LungCancer`
+
+-   1 = Yes. 0 = No
+
+-   `Trial` = `LungCancer_Yes` + `LungCancer_No`
+
+-   `Event` = `LungCancer_Yes`
+
+### Steps
+
+Pastikan selain `City` peubah lainnya adalah numerik. Bisa dibuah di excel atau di minitab nya langsung. [Cara ubah di minitab](https://support.minitab.com/en-us/minitab/21/help-and-how-to/manipulate-data-in-worksheets-columns-and-rows/how-to/change-the-data-type-of-columns/example/#){.uri}
+
+1.  Pada Menu, pilih Stat ➡️ Regression ➡️Binary Logistic Regression ➡️ Fit Binary Logistic Model
+
+    ![](images/Screenshot 2023-11-17 112119.png){width="579"}
+
+2.  Memasukkan peubah-peubah seperti pada gambar\
+    ![](images/Screenshot 2023-11-17 112535.png){width="458"}
+
+3.  
