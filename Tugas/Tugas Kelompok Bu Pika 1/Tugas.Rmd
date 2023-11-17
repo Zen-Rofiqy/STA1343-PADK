@@ -219,7 +219,7 @@ no2 <- data.frame(R = c(rasio.odds[1:2][[2]],
                         anova$`Pr(>Chisq)`[1] %>% sprintf("%.2e", .)),
                   SAS = c(2.161, 274.4587, "<0.0001"), 
                   MiniTab = c(2.1751, NA, NA))
-rownames(no2) <- c("Rasio Odds", "Chisq", "P-Value")
+rownames(no2) <- c("Rasio Odds", "Statistik Wald", "P-Value")
 datatable(no2)
 ```
 
@@ -278,9 +278,7 @@ Untuk No 4, hanya bisa dilakukan di **Rstudio** saja.
 
 ```{r message=FALSE, warning=FALSE}
 install_load("ResourceSelection")
-hoslem.test(model$y, fitted(model))
-
-predicted_probabilities <- predict(model, type = "response")
+hoslem <- hoslem.test(model$y, fitted(model)); hoslem
 ```
 
 Didapatkan *Khi-kuadrat* sebesar $1.388$. Nilainya sangat kecil, sehingga dapat dinyatakan **kurang dari** $0.001$. Didapat pula *p-value* yang besar yakni sebesar $0.9944$. Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
@@ -298,6 +296,31 @@ Didapatkan **nilai *khi-kuadrat*** sebesar $1.6062$. Dan **p-value** sebesar $0.
 > $H_1$ : Model Tidak cocok
 
 Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
+
+### MiniTab
+
+![](images/Screenshot 2023-11-17 121028.png){width="269"}
+
+Didapatkan **nilai *khi-kuadrat*** sebesar $0.70$. Dan **p-value** sebesar $0.951$.
+
+**Hipotesis**
+
+> $H_0$ : Model Cocok
+>
+> $H_1$ : Model Tidak cocok
+
+Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
+
+### Perbandingan
+
+```{r}
+no3 <- data.frame(R = c(hoslem[["statistic"]][[1]], 
+                        hoslem[["p.value"]][[1]]) %>% round(.,4),
+                  SAS = c(1.6062, 0.9521), 
+                  MiniTab = c(0.70, 0.951))
+rownames(no3) <- c("khi-kuadrat", "P-Value")
+datatable(no3)
+```
 
 > Sehingga jawaban yang tepat adalah
 
