@@ -151,13 +151,13 @@ Bisa dilihat pada bagian ![](images/Screenshot%202023-11-17%20092427.png){width=
 
 Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7704$.
 
-### **Minitab**
+### Minitab
 
-![](images/Screenshot 2023-11-17 113117.png){width="468"}
+![](images/Screenshot%202023-11-17%20113117.png){width="468"}
 
 Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7771$.
 
-### Perbandingan
+### **Perbandingan**
 
 ```{r}
 no1 <- data.frame(R = summary(model)[["coefficients"]]["SmokingYes",1] %>%
@@ -201,17 +201,17 @@ Lalu nilai **Statistik Uji Wald** nya sebesar $275.988$ dan *p-value* nya sangat
 
 Didapatkan **Nilai odds** pada peubah `Smoking` sebesar $2.161$.
 
-![](images/Screenshot 2023-11-17 094001.png){width="262"}
+![](images/Screenshot%202023-11-17%20094001.png){width="262"}
 
 Didapatkan **Statistik Uji Wald** pada peubah `Smoking` sebesar $274.4587$. Dan **p-value** nya sangat kecil yakni kurang dari $0.0001$.
 
 ### Minitab
 
-![](images/Screenshot 2023-11-17 113648.png)
+![](images/Screenshot%202023-11-17%20113648.png)
 
 Didapatkan **Nilai odds** pada peubah `Smoking` sebesar $2.1751$.
 
-### Perbandingan
+### **Perbandingan**
 
 ```{r}
 no2 <- data.frame(R = c(rasio.odds[1:2][[2]], 
@@ -285,7 +285,7 @@ Didapatkan *Khi-kuadrat* sebesar $1.388$. Nilainya sangat kecil, sehingga dapat 
 
 ### SAS
 
-![](images/Screenshot 2023-11-17 100311.png){width="236"}
+![](images/Screenshot%202023-11-17%20100311.png){width="236"}
 
 Didapatkan **nilai *khi-kuadrat*** sebesar $1.6062$. Dan **p-value** sebesar $0.9521$.
 
@@ -299,7 +299,7 @@ Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0
 
 ### MiniTab
 
-![](images/Screenshot 2023-11-17 121028.png){width="269"}
+![](images/Screenshot%202023-11-17%20121028.png){width="269"}
 
 Didapatkan **nilai *khi-kuadrat*** sebesar $0.70$. Dan **p-value** sebesar $0.951$.
 
@@ -311,20 +311,23 @@ Didapatkan **nilai *khi-kuadrat*** sebesar $0.70$. Dan **p-value** sebesar $0.95
 
 Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
 
-### Perbandingan
+### **Perbandingan**
 
 ```{r}
 no3 <- data.frame(R = c(hoslem[["statistic"]][[1]], 
+                        hoslem[["parameter"]][["df"]], 
                         hoslem[["p.value"]][[1]]) %>% round(.,4),
-                  SAS = c(1.6062, 0.9521), 
-                  MiniTab = c(0.70, 0.951))
-rownames(no3) <- c("khi-kuadrat", "P-Value")
+                  SAS = c(1.6062, 6, 0.9521), 
+                  MiniTab = c(0.70, 4, 0.951))
+rownames(no3) <- c("khi-kuadrat", "Db", "P-Value")
 datatable(no3)
 ```
 
-> Sehingga jawaban yang tepat adalah
+Terdapat perbedaan cukup jauh pada nilai *Khi-kuadrat* nya. Namun itu juga bisa disebabkan oleh perbedaan Derajat bebasnya. Walaupun begitu *p-value* nya tidak berbeda jauh. Sehingga keputusan dan kesimpulannya tetap sama.
 
-![](images/Screenshot 2023-11-17 100615.png){width="314"}
+> Karena ada dua software yang memiliki jawaban yang sama. Maka jawaban yang tepat adalah
+
+![](images/Screenshot%202023-11-17%20100615.png){width="314"}
 
 ## **No 6.**
 
@@ -375,7 +378,7 @@ Diperoleh nilai $log{(\text{L}_0^{-2})}$ adalah sebesar $11663.37$. Lalu $log{(\
 
 ![](images/Screenshot%202023-11-17%20081709.png){width="381"}
 
-# Hasil software lain {.tabset}
+# Pengerjaan di Software Lain {.tabset}
 
 ## SAS
 
@@ -431,37 +434,11 @@ RUN;
 
 ![](images/Screenshot%202023-11-17%20084758.png)
 
-#### No 5.
-
-> Lakukan **Uji kebaikan suai Hosmer** and **Lemeshow** terhadap model yang di tentukan. Tentukan *khi-kuadrat, p-value, keputusan, dan kesimpulan*.
-
-![](images/Screenshot 2023-11-17 100311.png){width="236"}
-
-Didapatkan **nilai *khi-kuadrat*** sebesar $1.6062$. Dan **p-value** sebesar $0.9521$.
-
-**Hipotesis**
-
-> $H_0$ : Model Cocok
->
-> $H_1$ : Model Tidak cocok
-
-Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
-
-> Sehingga jawaban yang tepat adalah
-
-![](images/Screenshot 2023-11-17 100615.png){width="314"}
-
-#### No 6.
-
-> Jika ingin **diuji** apakah model dengan kovariat city dan smoking **(L1) lebih baik** daripada model dengan hanya intersep saja **(L0)**, maka dilakukan **LR test**.
-
-Sayangnya saya blm tau caranya menampilkan ini di SAS. 🙏
-
 ## Minitab
 
 ### Import data
 
-![](images/Screenshot 2023-11-17 111453.png){width="220"}
+![](images/Screenshot%202023-11-17%20111453.png){width="220"}
 
 Dimana :
 
@@ -479,88 +456,14 @@ Pastikan selain `City` peubah lainnya adalah numerik. Bisa dibuah di excel atau 
 
 1.  Pada Menu, pilih Stat ➡️ Regression ➡️Binary Logistic Regression ➡️ Fit Binary Logistic Model
 
-    ![](images/Screenshot 2023-11-17 112119.png){width="579"}
+    ![](images/Screenshot%202023-11-17%20112119.png){width="579"}
 
 2.  Memasukkan peubah-peubah seperti pada gambar\
-    ![](images/Screenshot 2023-11-17 112535.png){width="458"}
+    ![](images/Screenshot%202023-11-17%20112535.png){width="458"}
 
 3.  Pada bagian Result pastikan tampilannya seperti ini (Bagian **Display of results** dipilih yang **Expanded tables**)\
-    ![](images/Screenshot 2023-11-17 112659.png){width="449"}
+    ![](images/Screenshot%202023-11-17%20112659.png){width="449"}
 
 ### Output
 
-![](images/Screenshot 2023-11-17 112922.png)
-
-### Jawab Soal
-
-#### No 1.
-
-> Hitunglah **dugaan parameter** regresi logistik berganda untuk **Peubah Smoking**
-
-![](images/Screenshot 2023-11-17 113117.png){width="468"}
-
-Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7771$.
-
-> Sehingga jawaban yang tepat adalah
-
-![](images/Screenshot%202023-11-17%20062616.png){width="305"}
-
-#### No 2.
-
-> **Nilai odds, p-value, dan Statistik Uji Wald** pada peubah `Smoking`
-
-![](images/Screenshot 2023-11-17 113648.png)
-
-Didapatkan **Nilai odds** pada peubah `Smoking` sebesar $2.1751$.
-
-![](images/Screenshot 2023-11-17 094001.png){width="262"}
-
-Didapatkan **Statistik Uji Wald** pada peubah `Smoking` sebesar $274.4587$. Dan **p-value** nya sangat kecil yakni kurang dari $0.0001$.
-
-> Sehingga jawaban yang tepat adalah
-
-![](images/Screenshot%202023-11-17%20065015.png){width="355"}
-
-#### No 3.
-
-> **Rasio Odds** Lung Cancer
-
-![](images/Screenshot%202023-11-17%20085802.png){width="247"}
-
-Seperti yang sudah dijelaskan pada No 2. **Nilai odds** pada peubah `Smoking` sebesar $2.161$. Yang berarti kelompok yang memiliki kecenderungan lebih tinggi terkena kanker paru-paru adalah kelompok yang **merokok.** Yakni $2.161$ kali lebih besar dari pada yang tidak **merokok.**
-
-> Sehingga jawaban yang tepat adalah
-
-![](images/Screenshot%202023-11-17%20065300.png){width="325"}
-
-#### No 4.
-
-> **Kota** yang memilikipengaruh yang **signifikan**
-
-Sayangnya saya blm tau caranya menampilkan ini di SAS. 🙏
-
-#### No 5.
-
-> Lakukan **Uji kebaikan suai Hosmer** and **Lemeshow** terhadap model yang di tentukan. Tentukan *khi-kuadrat, p-value, keputusan, dan kesimpulan*.
-
-![](images/Screenshot 2023-11-17 100311.png){width="236"}
-
-Didapatkan **nilai *khi-kuadrat*** sebesar $1.6062$. Dan **p-value** sebesar $0.9521$.
-
-**Hipotesis**
-
-> $H_0$ : Model Cocok
->
-> $H_1$ : Model Tidak cocok
-
-Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
-
-> Sehingga jawaban yang tepat adalah
-
-![](images/Screenshot 2023-11-17 100615.png){width="314"}
-
-#### No 6.
-
-> Jika ingin **diuji** apakah model dengan kovariat city dan smoking **(L1) lebih baik** daripada model dengan hanya intersep saja **(L0)**, maka dilakukan **LR test**.
-
-Sayangnya saya blm tau caranya menampilkan ini di SAS. 🙏
+![](images/Screenshot%202023-11-17%20112922.png)
