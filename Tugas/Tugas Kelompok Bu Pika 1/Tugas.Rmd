@@ -137,11 +137,11 @@ Bisa di cek bahwa. Jumlah data yang di transform sudah benar.
 > Hitunglah **dugaan parameter** regresi logistik berganda untuk **Peubah Smoking**
 
 ```{r}
-model <- glm(LungCancer ~ Smoking, data = data2, family = binomial)
+model <- glm(LungCancer ~ Smoking + City, data = data2, family = binomial)
 summary(model)
 ```
 
-Bisa dilihat pada bagian ![](images/Screenshot 2023-11-17 062014.png){width="135"} bahwa nilai **dugaan parameter regresi logistik berganda untuk Peubah Smoking** adalah sekitar $0.75873$.
+Bisa dilihat pada bagian ![](images/Screenshot 2023-11-17 092427.png){width="134"} bahwa nilai **dugaan parameter regresi logistik berganda untuk Peubah Smoking** adalah sekitar $0.777062$.
 
 Sehingga jawaban yang tepat adalah :
 
@@ -157,17 +157,17 @@ rasio.odds <- exp(coef(model)) %>% round(.,3)
 p.value <- summary(model)$coefficients[, "Pr(>|z|)"] %>% 
   sprintf("%.2e", .)
 
-datatable(data.frame(rasio.odds, p.value))
+datatable(data.frame(rasio.odds[1:2], p.value[1:2]))
 ```
 
-Didapat bahwa nilai Rasio odds pada peubah Smoking diperoleh sebesar $2.136$.
+Didapat bahwa nilai Rasio odds pada peubah Smoking diperoleh sebesar $2.175$.
 
 ```{r message=FALSE, warning=FALSE}
 install_load('car')
 Anova(model, type="II", test.statistic="Wald")
 ```
 
-Lalu nilai **Statistik Uji Wald** nya sebesar $269.09$ dan *p-value* nya sangat kecil yakni kurang dari $2.2\times10^{-16}$.
+Lalu nilai **Statistik Uji Wald** nya sebesar $269.09$ dan *p-value* nya sangat kecil yakni **kurang dari** $2.2\times10^{-16}$.
 
 Sehingga jawaban yang tepat adalah
 
@@ -178,10 +178,10 @@ Sehingga jawaban yang tepat adalah
 > **Rasio Odds** Lung Cancer
 
 ```{r}
-rasio.odds
+rasio.odds[1:2]
 ```
 
-Bisa dilihat bahwa berdasarkan nilai rasio odds nya, kelompok yang memiliki kecenderungan lebih tinggi terkena kanker paru-paru adalah kelompok yang **merokok**. Yakni $2.136$ kali lebih besar dari pada yang tidak **merokok.**
+Bisa dilihat bahwa berdasarkan nilai rasio odds nya, kelompok yang memiliki kecenderungan lebih tinggi terkena kanker paru-paru adalah kelompok yang **merokok**. Yakni $2.175$ kali lebih besar dari pada yang tidak **merokok.**
 
 Sehingga jawaban yang tepat adalah
 
@@ -340,18 +340,70 @@ RUN;
 
 > Hitunglah **dugaan parameter** regresi logistik berganda untuk **Peubah Smoking**
 
+![](images/Screenshot 2023-11-17 085240.png){width="354"}
+
+Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7704$.
+
 Sehingga jawaban yang tepat adalah :
 
 ![](images/Screenshot 2023-11-17 062616.png){width="305"}
 
 #### No 2. 
 
+> **Nilai odds, p-value, dan Statistik Uji Wald** pada peubah `Smoking`
+
+![](images/Screenshot 2023-11-17 085802.png){width="247"}
+
+Didapatkan **Nilai odds** pada peubah `Smoking` sebesar $2.161$.
+
+![](images/Screenshot 2023-11-17 090052.png){width="260"}
+
+Sehingga jawaban yang tepat adalah
+
+![](images/Screenshot 2023-11-17 065015.png){width="355"}
+
 #### No 3. 
+
+> **Rasio Odds** Lung Cancer
+
+Sehingga jawaban yang tepat adalah
+
+![](images/Screenshot 2023-11-17 065300.png){width="325"}
 
 #### No 4. 
 
+> **Kota** yang memilikipengaruh yang **signifikan**
+
+Sehingga jawaban yang tepat adalah
+
+![](images/Screenshot 2023-11-17 070120.png){width="289"}
+
 #### No 5. 
 
+> Lakukan **Uji kebaikan suai Hosmer** and **Lemeshow** terhadap model yang di tentukan. Tentukan *khi-kuadrat, p-value, keputusan, dan kesimpulan*.
+
+**Hipotesis**
+
+> $H_0$ : Model Cocok
+>
+> $H_1$ : Model Tidak cocok
+
+Sehingga jawaban yang tepat adalah
+
+![](images/Screenshot 2023-11-17 075748-01.png){width="347"}
+
 #### No 6. 
+
+> Jika ingin **diuji** apakah model dengan kovariat city dan smoking **(L1) lebih baik** daripada model dengan hanya intersep saja **(L0)**, maka dilakukan **LR test**.
+
+**Hipotesis**
+
+> $H_0$ : `City` dan `Smoking` tidak berpengaruh terhadap model
+>
+> $H_1$ : `City` dan `Smoking` berpengaruh terhadap model
+
+Sehingga jawaban yang tepat adalah
+
+![](images/Screenshot 2023-11-17 081709.png){width="381"}
 
 ## Minitab
