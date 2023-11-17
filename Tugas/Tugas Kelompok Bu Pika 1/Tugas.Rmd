@@ -406,14 +406,6 @@ Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0
 
 > Jika ingin **diuji** apakah model dengan kovariat city dan smoking **(L1) lebih baik** daripada model dengan hanya intersep saja **(L0)**, maka dilakukan **LR test**.
 
-**Hipotesis**
-
-> $H_0$ : `City` dan `Smoking` tidak berpengaruh terhadap model
->
-> $H_1$ : `City` dan `Smoking` berpengaruh terhadap model
-
-Sehingga jawaban yang tepat adalah
-
-![](images/Screenshot%202023-11-17%20081709.png){width="381"}
+Sayangnya saya blm tau caranya menampilkan ini di SAS. 🙏
 
 ## Minitab
