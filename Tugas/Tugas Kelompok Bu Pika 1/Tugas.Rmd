@@ -143,6 +143,18 @@ summary(model)
 
 Bisa dilihat pada bagian ![](images/Screenshot%202023-11-17%20092427.png){width="134"} bahwa nilai **dugaan parameter regresi logistik berganda untuk Peubah Smoking** adalah sekitar $0.777062$.
 
+> Hasil SAS
+
+![](images/Screenshot%202023-11-17%20085240.png){width="354"}
+
+Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7704$.
+
+> Hasil Minitab
+
+![](images/Screenshot 2023-11-17 113117.png){width="468"}
+
+Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7771$.
+
 > Sehingga jawaban yang tepat adalah :
 
 ![](images/Screenshot%202023-11-17%20062616.png){width="305"}
@@ -435,4 +447,83 @@ Pastikan selain `City` peubah lainnya adalah numerik. Bisa dibuah di excel atau 
 2.  Memasukkan peubah-peubah seperti pada gambar\
     ![](images/Screenshot 2023-11-17 112535.png){width="458"}
 
-3.  
+3.  Pada bagian Result pastikan tampilannya seperti ini (Bagian **Display of results** dipilih yang **Expanded tables**)\
+    ![](images/Screenshot 2023-11-17 112659.png){width="449"}
+
+### Output
+
+![](images/Screenshot 2023-11-17 112922.png)
+
+### Jawab Soal
+
+#### No 1.
+
+> Hitunglah **dugaan parameter** regresi logistik berganda untuk **Peubah Smoking**
+
+![](images/Screenshot 2023-11-17 113117.png){width="468"}
+
+Terlihat bahwa nilai yang diperoleh untuk **dugaan parameter** regresi logistik berganda pada **Peubah Smoking** adalah sebesar $0.7771$.
+
+> Sehingga jawaban yang tepat adalah
+
+![](images/Screenshot%202023-11-17%20062616.png){width="305"}
+
+#### No 2.
+
+> **Nilai odds, p-value, dan Statistik Uji Wald** pada peubah `Smoking`
+
+![](images/Screenshot 2023-11-17 113648.png)
+
+Didapatkan **Nilai odds** pada peubah `Smoking` sebesar $2.1751$.
+
+![](images/Screenshot 2023-11-17 094001.png){width="262"}
+
+Didapatkan **Statistik Uji Wald** pada peubah `Smoking` sebesar $274.4587$. Dan **p-value** nya sangat kecil yakni kurang dari $0.0001$.
+
+> Sehingga jawaban yang tepat adalah
+
+![](images/Screenshot%202023-11-17%20065015.png){width="355"}
+
+#### No 3.
+
+> **Rasio Odds** Lung Cancer
+
+![](images/Screenshot%202023-11-17%20085802.png){width="247"}
+
+Seperti yang sudah dijelaskan pada No 2. **Nilai odds** pada peubah `Smoking` sebesar $2.161$. Yang berarti kelompok yang memiliki kecenderungan lebih tinggi terkena kanker paru-paru adalah kelompok yang **merokok.** Yakni $2.161$ kali lebih besar dari pada yang tidak **merokok.**
+
+> Sehingga jawaban yang tepat adalah
+
+![](images/Screenshot%202023-11-17%20065300.png){width="325"}
+
+#### No 4.
+
+> **Kota** yang memilikipengaruh yang **signifikan**
+
+Sayangnya saya blm tau caranya menampilkan ini di SAS. 🙏
+
+#### No 5.
+
+> Lakukan **Uji kebaikan suai Hosmer** and **Lemeshow** terhadap model yang di tentukan. Tentukan *khi-kuadrat, p-value, keputusan, dan kesimpulan*.
+
+![](images/Screenshot 2023-11-17 100311.png){width="236"}
+
+Didapatkan **nilai *khi-kuadrat*** sebesar $1.6062$. Dan **p-value** sebesar $0.9521$.
+
+**Hipotesis**
+
+> $H_0$ : Model Cocok
+>
+> $H_1$ : Model Tidak cocok
+
+Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
+
+> Sehingga jawaban yang tepat adalah
+
+![](images/Screenshot 2023-11-17 100615.png){width="314"}
+
+#### No 6.
+
+> Jika ingin **diuji** apakah model dengan kovariat city dan smoking **(L1) lebih baik** daripada model dengan hanya intersep saja **(L0)**, maka dilakukan **LR test**.
+
+Sayangnya saya blm tau caranya menampilkan ini di SAS. 🙏
