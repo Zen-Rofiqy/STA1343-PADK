@@ -258,6 +258,8 @@ Bisa dilihat pada bagian
 
 Bahwa **Kota yang memiliki pengaruh yang signifikan** adalah kota **Taiyuan.**
 
+Untuk No 4, hanya bisa dilakukan di **Rstudio** saja.
+
 > Sehingga jawaban yang tepat adalah
 
 ![](images/Screenshot%202023-11-17%20070120.png){width="289"}
@@ -265,6 +267,8 @@ Bahwa **Kota yang memiliki pengaruh yang signifikan** adalah kota **Taiyuan.**
 ## **No 5.**
 
 > Lakukan **Uji kebaikan suai Hosmer** and **Lemeshow** terhadap model yang di tentukan. Tentukan *khi-kuadrat, p-value, keputusan, dan kesimpulan*.
+
+### Rstudio
 
 **Hipotesis**
 
@@ -280,6 +284,20 @@ predicted_probabilities <- predict(model, type = "response")
 ```
 
 Didapatkan *Khi-kuadrat* sebesar $1.388$. Nilainya sangat kecil, sehingga dapat dinyatakan **kurang dari** $0.001$. Didapat pula *p-value* yang besar yakni sebesar $0.9944$. Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
+
+### SAS
+
+![](images/Screenshot 2023-11-17 100311.png){width="236"}
+
+Didapatkan **nilai *khi-kuadrat*** sebesar $1.6062$. Dan **p-value** sebesar $0.9521$.
+
+**Hipotesis**
+
+> $H_0$ : Model Cocok
+>
+> $H_1$ : Model Tidak cocok
+
+Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
 
 > Sehingga jawaban yang tepat adalah
 
@@ -389,12 +407,6 @@ RUN;
 ### Output
 
 ![](images/Screenshot%202023-11-17%20084758.png)
-
-#### No 4.
-
-> **Kota** yang memilikipengaruh yang **signifikan**
-
-Sayangnya saya blm tau caranya menampilkan ini di SAS. 🙏
 
 #### No 5.
 
