@@ -171,7 +171,7 @@ datatable(no1)
 
 ![](images/Screenshot%202023-11-17%20062616.png){width="305"}
 
-## No 2.
+## No 2. {.tabset}
 
 > **Nilai odds, p-value, dan Statistik Uji Wald** pada peubah Smoking
 
@@ -264,7 +264,7 @@ Untuk No 4, hanya bisa dilakukan di **Rstudio** saja.
 
 ![](images/Screenshot%202023-11-17%20070120.png){width="289"}
 
-## **No 5.**
+## **No 5.** {.tabset}
 
 > Lakukan **Uji kebaikan suai Hosmer** and **Lemeshow** terhadap model yang di tentukan. Tentukan *khi-kuadrat, p-value, keputusan, dan kesimpulan*.
 
@@ -382,7 +382,7 @@ Diperoleh nilai $log{(\text{L}_0^{-2})}$ adalah sebesar $11663.37$. Lalu $log{(\
 
 ## SAS
 
-[File.sas](https://github.com/Zen-Rofiqy/STA1343-PADK/blob/main/Tugas/Tugas%20Kelompok%20Bu%20Pika%201/%5BPADK%5D%20Regresi%20Logistik-Regresi%20Berganda.sas){.uri}
+[File.sas](https://raw.githubusercontent.com/Zen-Rofiqy/STA1343-PADK/main/Tugas/Tugas%20Kelompok%20Bu%20Pika%201/%5BPADK%5D%20Regresi%20Logistik-Regresi%20Berganda.sas){.uri}
 
 ### Code
 
@@ -435,6 +435,8 @@ RUN;
 ![](images/Screenshot%202023-11-17%20084758.png)
 
 ## Minitab
+
+[File.mpx](https://github.com/Zen-Rofiqy/STA1343-PADK/raw/main/Tugas/Tugas%20Kelompok%20Bu%20Pika%201/Minitab.mpx){.uri}
 
 ### Import data
 
