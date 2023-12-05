@@ -269,9 +269,7 @@ model <- glm(event ~ gender+ age+ greywage+ way,
 summary(model)
 ```
 
-**Model Regresi Logistik:** $$\text{logit}[\pi(x)]=\alpha -\beta_1 \text{ gender}_m -\beta_2 \text{ age} -\beta_3 \text{ greywage}_{white} + \beta_4 \text{ way}_{car} -\beta_5 \text{way}_{foot}$$
-
-$$\text{logit}[\pi(x)]=0.528677 -0.090045 \text{ gender}_m -0.014385 \text{ age} -0.261378 \text{ greywage}_{white} + 0.062163 \text{ way}_{car} -0.595413 \text{way}_{foot}$$ $$logit[\pi(x)]=0.555087-0.014941age-0.094737genderm+0.062777waycar-0,622220wayfoot$$
+**Model Regresi Logistik:** $$\begin{equation}\begin{aligned}\text{logit}[\pi(x)] &=\alpha -\beta_1 \text{ gender}_m -\beta_2 \text{ age} -\beta_3 \text{ greywage}_{white} + \beta_4 \text{ way}_{car} -\beta_5 \text{way}_{foot} \\ &=  0.528677 -0.090045 \text{ gender}_m -0.014385 \text{ age} -0.261378 \text{ greywage}_{white} \\ &+ 0.062163 \text{ way}_{car} -0.595413 \text{way}_{foot} \end{aligned}\end{equation}$$
 
 $age$ = usia karyawan
 
