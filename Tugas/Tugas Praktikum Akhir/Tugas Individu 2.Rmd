@@ -153,7 +153,7 @@ theme.sb.v <- list(
 )
 ```
 
-```{r dpi=300,  fig.height = 30, fig.width = 70, fig.align = "center", warning=FALSE, message = FALSE}
+```{r fig.align="center", fig.height=30, fig.width=70, message=FALSE, warning=FALSE, dpi=300, error=FALSE}
 install_load('ggridges','cowplot')
 
 c1 <-
