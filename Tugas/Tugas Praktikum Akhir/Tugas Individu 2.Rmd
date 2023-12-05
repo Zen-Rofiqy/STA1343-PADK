@@ -377,12 +377,13 @@ p <- function(logit){
 alpha <- summary(model)$coefficients[1,1]
 
 logit_x <- function(c1,c2,c3,c4){
-  alpha+b1*c1+b2*c2+b3*c3+b4*c4+b5*rataan_age
+  alpha+ b1*c1 +b2*c2 +b3*c3 +b4*c4 +b5*rataan_age
 }
 ```
 
 ```{r}
-Peubah <- c("Bus_Laki-laki","Bus_Wanita","Car_Laki-laki","Car_Wanita",
+Peubah <- c("Bus_Laki-laki","Bus_Wanita",
+            "Car_Laki-laki","Car_Wanita",
             "Foot_Laki-laki","Foot_Wanita")
 Logit <- c(logit_x(0,0,1),logit_x(0,0,0),
            logit_x(1,0,1),logit_x(1,0,0),
