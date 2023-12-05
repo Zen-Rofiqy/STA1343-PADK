@@ -52,44 +52,215 @@ path <- function(){
 #Copy r path, paste ke var yang diinginkan
 ```
 
-```{r}
-install_load("lmtest","car","plotrix","aod","ggplot2")
+```{r message=FALSE, warning=FALSE}
+install_load("lmtest","car","plotrix","aod","ggplot2","rio","DT","dplyr",
+             "viridis","ggrepel")
 ```
 
 # Pendahuluan
 
-## Data
+## Metadata
 
-Data yang digunakan adalah data sekunder yang terdiri dari 7 peubah dengan 1129 baris. Akan tetapi, dalam analisis ini hanya digunakan 4 peubah, yaitu *event* sebagai peubah respon, lalu *age, gender, dan way* sebagai peubah penjelas.
+Data yang digunakan adalah data sekunder yang terdiri dari 7 peubah dengan 1129 baris dengan `event` sebagai peubah respons.
 
-+-------------+------------------------+-----------------------------------------+
-| **Peubah**  | **Keterangan**         | **Tipe Peubah**                         |
-+:===========:+:======================:+=========================================+
-| event (Y)   | Kejadian Turnover      | Kategorik (Biner)                       |
-|             |                        |                                         |
-|             |                        | 1 : Turnover                            |
-|             |                        |                                         |
-|             |                        | 0 : Tidak Turnover                      |
-+-------------+------------------------+-----------------------------------------+
-| gender      | Jenis Kelamin          | Kategoriik                              |
-|             |                        |                                         |
-|             |                        | m : male (Pria)                         |
-|             |                        |                                         |
-|             |                        | f : female (Wanita)                     |
-+-------------+------------------------+-----------------------------------------+
-| age         | Usia                   | Numerik                                 |
-+-------------+------------------------+-----------------------------------------+
-| industry    | Bidang Pekerjaan       |                                         |
-+-------------+------------------------+-----------------------------------------+
-| profession  | Profesi                |                                         |
-+-------------+------------------------+-----------------------------------------+
-| greywage    | Membayar Pajak/Tidak   |                                         |
-+-------------+------------------------+-----------------------------------------+
-| way         | Transportasi ke Kantor | Kategorik                               |
-|             |                        |                                         |
-|             |                        | bus : Naik Bus                          |
-|             |                        |                                         |
-|             |                        | car : Naik Mobil                        |
-|             |                        |                                         |
-|             |                        | foot : Jalan Kaki                       |
-+-------------+------------------------+-----------------------------------------+
++-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Peubah**  | **Keterangan**         | **Tipe Peubah**                                                                                                                                      |
++:===========:+:======================:+======================================================================================================================================================+
+| event (Y)   | Kejadian Turnover      | Kategorik (Biner)                                                                                                                                    |
+|             |                        |                                                                                                                                                      |
+|             |                        | 1 : Turnover                                                                                                                                         |
+|             |                        |                                                                                                                                                      |
+|             |                        | 0 : Tidak Turnover                                                                                                                                   |
++-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| gender      | Jenis Kelamin          | Kategoriik                                                                                                                                           |
+|             |                        |                                                                                                                                                      |
+|             |                        | m : male (Pria)                                                                                                                                      |
+|             |                        |                                                                                                                                                      |
+|             |                        | f : female (Wanita)                                                                                                                                  |
++-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| age         | Usia                   | Numerik                                                                                                                                              |
++-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| industry    | Bidang Pekerjaan       | Kategorik                                                                                                                                            |
+|             |                        |                                                                                                                                                      |
+|             |                        | Banks, PowerGeneration, Retail, manufacture, Consult, State, Building, IT, HoReCa, Telecom, Pharma, Mining, transport, Agriculture, RealEstate, etc  |
++-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| profession  | Profesi                | Kategorik                                                                                                                                            |
+|             |                        |                                                                                                                                                      |
+|             |                        | HR, Commercial, Marketing, Sales, BusinessDevelopment, Finanñe, Teaching, manage, IT, Law, Consult, Engineer, PR, Accounting, etc                    |
++-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| greywage    | Membayar Pajak/Tidak   | Kategorik                                                                                                                                            |
+|             |                        |                                                                                                                                                      |
+|             |                        | black : tidak membayar pajak (illegal)                                                                                                               |
+|             |                        |                                                                                                                                                      |
+|             |                        | white : membayar pajak (legal)                                                                                                                       |
+|             |                        |                                                                                                                                                      |
+|             |                        | grey : setengah black & white (illegal)                                                                                                              |
++-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| way         | Transportasi ke Kantor | Kategorik                                                                                                                                            |
+|             |                        |                                                                                                                                                      |
+|             |                        | bus : Naik Bus                                                                                                                                       |
+|             |                        |                                                                                                                                                      |
+|             |                        | car : Naik Mobil                                                                                                                                     |
+|             |                        |                                                                                                                                                      |
+|             |                        | foot : Jalan Kaki                                                                                                                                    |
++-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+## Data Entry
+
+```{r}
+data <- import("https://raw.githubusercontent.com/Zen-Rofiqy/STA1343-PADK/main/Tugas/Tugas%20Praktikum%20Akhir/Data.csv")
+datatable(data)
+```
+
+## Data Checking {.tabset}
+
+### Data kosong
+
+```{r}
+sum(is.na(data))
+```
+
+Tidak ada data kosong.
+
+### Tipe data
+
+```{r}
+str(data)
+```
+
+> Mengubah tipe data
+
+```{r}
+data <- data %>%
+  mutate_all(~as.factor(.)) %>%
+  mutate(age = as.numeric(age))
+str(data)
+```
+
+## Eksplorasi data
+
+```{r message=FALSE, warning=FALSE}
+ggplot(data, aes(x=age, y=event, fill=event)) + geom_density_ridges() +
+  #COLORING
+  scale_fill_viridis(alpha = 0.75, #Opacity
+                     begin = 0.1, #Color pallte scale begins
+                     end = 0.9, #Color pallte scale ends
+                     direction = -1, #Flip color scale
+                     discrete = T, #Discrete Value
+                     option = "G") + #Color Palette
+  theme(plot.title = element_text(hjust=0.5),legend.position = "none") +
+  labs(x = "\nAge",y = "event(Y)\n", 
+       title = "Sebaran Age") + theme.sb.v
+```
+
+```{r}
+theme.sb.v <- list(
+  theme_minimal()  , 
+        theme(
+        text = element_text(size = 36),
+        axis.text.x = element_text(vjust = .5, face = "bold"),
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5) )
+)
+```
+
+```{r dpi=300,  fig.height = 30, fig.width = 70, fig.align = "center", warning=FALSE, message = FALSE}
+install_load('ggridges','cowplot')
+
+c1 <-
+ggplot(data = data %>% count(event) %>% # banyaknya laptop brand x
+  mutate(perc = round(n / sum(n) * 100)), #buat persentase
+       aes(x = reorder(event, -n), y = perc)) +
+  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_text(aes(label = prettyNum(n,big.mark = ",")
+                ), vjust = -0.5, size = 8, col="orange4", 
+            fontface = "bold") + # Tambahkan label
+  labs(x = "\nevent(Y)", y = "Persentase (%)\n", 
+       title = "\nSebaran event(Y)\n") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme.sb.v
+
+c2 <- 
+ggplot(data = data %>% count(gender) %>% # banyaknya laptop brand x
+  mutate(perc = round(n / sum(n) * 100)), #buat persentase
+       aes(x = reorder(gender, -n), y = perc)) +
+  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_text(aes(label = prettyNum(n,big.mark = ",")
+                ), vjust = -0.5, size = 8, col="orange4", 
+            fontface = "bold") + # Tambahkan label
+  labs(x = "\nGender", y = "Persentase (%)\n", 
+       title = "\nSebaran Gender\n") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme.sb.v
+
+c3 <- 
+ggplot(data, aes(x=age, y=event, fill=event)) + geom_density_ridges() +
+  #COLORING
+  scale_fill_viridis(alpha = 0.75, #Opacity
+                     begin = 0.1, #Color pallte scale begins
+                     end = 0.9, #Color pallte scale ends
+                     direction = -1, #Flip color scale
+                     discrete = T, #Discrete Value
+                     option = "G") + #Color Palette
+  theme(plot.title = element_text(hjust=0.5),legend.position = "none") +
+  labs(x = "\nAge",y = "event(Y)\n", 
+       title = "Sebaran Age") + theme.sb.v
+
+c4 <- 
+ggplot(data = data %>% count(industry) %>% # banyaknya laptop brand x
+  mutate(perc = round(n / sum(n) * 100)), #buat persentase
+       aes(x = reorder(industry, -n), y = perc)) +
+  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_text(aes(label = prettyNum(n,big.mark = ",")
+                ), vjust = -0.5, size = 8, col="orange4", 
+            fontface = "bold") + # Tambahkan label
+  labs(x = "\nIndustry", y = "Persentase (%)\n", 
+       title = "\nSebaran Industry\n") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme.sb.v +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+c5 <- 
+ggplot(data = data %>% count(profession) %>% # banyaknya laptop brand x
+  mutate(perc = round(n / sum(n) * 100)), #buat persentase
+       aes(x = reorder(profession, -n), y = perc)) +
+  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_text(aes(label = prettyNum(n,big.mark = ",")
+                ), vjust = -0.5, size = 8, col="orange4", 
+            fontface = "bold") + # Tambahkan label
+  labs(x = "\nProfession", y = "Persentase (%)\n", 
+       title = "\nSebaran Profession\n") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme.sb.v + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+c6 <- 
+ggplot(data = data %>% count(greywage) %>% # banyaknya laptop brand x
+  mutate(perc = round(n / sum(n) * 100)), #buat persentase
+       aes(x = reorder(greywage, -n), y = perc)) +
+  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_text(aes(label = prettyNum(n,big.mark = ",")
+                ), vjust = -0.5, size = 8, col="orange4", 
+            fontface = "bold") + # Tambahkan label
+  labs(x = "\nGreywage", y = "Persentase (%)\n", 
+       title = "\nSebaran Greywage\n") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme.sb.v
+
+c7 <-
+ggplot(data = data %>% count(way) %>% # banyaknya laptop brand x
+  mutate(perc = round(n / sum(n) * 100)), #buat persentase
+       aes(x = reorder(way, -n), y = perc)) +
+  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_text(aes(label = prettyNum(n,big.mark = ",")
+                ), vjust = -0.5, size = 8, col="orange4", 
+            fontface = "bold") + # Tambahkan label
+  labs(x = "\nWay", y = "Persentase (%)\n", 
+       title = "\nSebaran Way\n") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme.sb.v
+
+plot_grid(c1, c2, c3, c4, c5, c6, c7, nrow=2 , 
+          rel_widths = c(1, 1, 1, 1,
+                         1, 1, 1))
+```
