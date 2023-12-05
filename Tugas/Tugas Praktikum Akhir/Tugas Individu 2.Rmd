@@ -63,47 +63,47 @@ install_load("lmtest","car","plotrix","aod","ggplot2","rio","DT","dplyr",
 
 Data yang digunakan adalah data sekunder yang terdiri dari 7 peubah dengan 1129 baris dengan `event` sebagai peubah respons.
 
-+-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Peubah**  | **Keterangan**         | **Tipe Peubah**                                                                                                                                      |
-+:===========:+:======================:+======================================================================================================================================================+
-| event (Y)   | Kejadian Turnover      | Kategorik (Biner)                                                                                                                                    |
-|             |                        |                                                                                                                                                      |
-|             |                        | 1 : Turnover                                                                                                                                         |
-|             |                        |                                                                                                                                                      |
-|             |                        | 0 : Tidak Turnover                                                                                                                                   |
-+-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| gender      | Jenis Kelamin          | Kategoriik                                                                                                                                           |
-|             |                        |                                                                                                                                                      |
-|             |                        | m : male (Pria)                                                                                                                                      |
-|             |                        |                                                                                                                                                      |
-|             |                        | f : female (Wanita)                                                                                                                                  |
-+-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| age         | Usia                   | Numerik                                                                                                                                              |
-+-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| industry    | Bidang Pekerjaan       | Kategorik                                                                                                                                            |
-|             |                        |                                                                                                                                                      |
-|             |                        | Banks, PowerGeneration, Retail, manufacture, Consult, State, Building, IT, HoReCa, Telecom, Pharma, Mining, transport, Agriculture, RealEstate, etc  |
-+-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| profession  | Profesi                | Kategorik                                                                                                                                            |
-|             |                        |                                                                                                                                                      |
-|             |                        | HR, Commercial, Marketing, Sales, BusinessDevelopment, Finanñe, Teaching, manage, IT, Law, Consult, Engineer, PR, Accounting, etc                    |
-+-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| greywage    | Membayar Pajak/Tidak   | Kategorik                                                                                                                                            |
-|             |                        |                                                                                                                                                      |
-|             |                        | black : tidak membayar pajak (illegal)                                                                                                               |
-|             |                        |                                                                                                                                                      |
-|             |                        | white : membayar pajak (legal)                                                                                                                       |
-|             |                        |                                                                                                                                                      |
-|             |                        | grey : setengah black & white (illegal)                                                                                                              |
-+-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| way         | Transportasi ke Kantor | Kategorik                                                                                                                                            |
-|             |                        |                                                                                                                                                      |
-|             |                        | bus : Naik Bus                                                                                                                                       |
-|             |                        |                                                                                                                                                      |
-|             |                        | car : Naik Mobil                                                                                                                                     |
-|             |                        |                                                                                                                                                      |
-|             |                        | foot : Jalan Kaki                                                                                                                                    |
-+-------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Peubah** | **Keterangan**         | **Tipe Peubah**                                                                                                                                     |
++:==========:+:======================:+=====================================================================================================================================================+
+| event (Y)  | Kejadian Turnover      | Kategorik (Biner)                                                                                                                                   |
+|            |                        |                                                                                                                                                     |
+|            |                        | 1 : Turnover                                                                                                                                        |
+|            |                        |                                                                                                                                                     |
+|            |                        | 0 : Tidak Turnover                                                                                                                                  |
++------------+------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| gender     | Jenis Kelamin          | Kategoriik                                                                                                                                          |
+|            |                        |                                                                                                                                                     |
+|            |                        | m : male (Pria)                                                                                                                                     |
+|            |                        |                                                                                                                                                     |
+|            |                        | f : female (Wanita)                                                                                                                                 |
++------------+------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| age        | Usia                   | Numerik                                                                                                                                             |
++------------+------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| industry   | Bidang Pekerjaan       | Kategorik                                                                                                                                           |
+|            |                        |                                                                                                                                                     |
+|            |                        | Banks, PowerGeneration, Retail, manufacture, Consult, State, Building, IT, HoReCa, Telecom, Pharma, Mining, transport, Agriculture, RealEstate, etc |
++------------+------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| profession | Profesi                | Kategorik                                                                                                                                           |
+|            |                        |                                                                                                                                                     |
+|            |                        | HR, Commercial, Marketing, Sales, BusinessDevelopment, Finanñe, Teaching, manage, IT, Law, Consult, Engineer, PR, Accounting, etc                   |
++------------+------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| greywage   | Membayar Pajak/Tidak   | Kategorik                                                                                                                                           |
+|            |                        |                                                                                                                                                     |
+|            |                        | black : tidak membayar pajak (illegal)                                                                                                              |
+|            |                        |                                                                                                                                                     |
+|            |                        | white : membayar pajak (legal)                                                                                                                      |
+|            |                        |                                                                                                                                                     |
+|            |                        | grey : setengah black & white (illegal)                                                                                                             |
++------------+------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| way        | Transportasi ke Kantor | Kategorik                                                                                                                                           |
+|            |                        |                                                                                                                                                     |
+|            |                        | bus : Naik Bus                                                                                                                                      |
+|            |                        |                                                                                                                                                     |
+|            |                        | car : Naik Mobil                                                                                                                                    |
+|            |                        |                                                                                                                                                     |
+|            |                        | foot : Jalan Kaki                                                                                                                                   |
++------------+------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ## Data Entry
 
@@ -159,7 +159,7 @@ ggplot(data = data %>% count(event) %>% # banyaknya laptop brand x
        aes(x = reorder(event, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#F47F51') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="orange4", 
+                ), vjust = -0.5, size = 8, col="karyawane4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nevent(Y)", y = "Persentase (%)\n", 
        title = "\nSebaran event(Y)\n") +
@@ -172,7 +172,7 @@ ggplot(data = data %>% count(gender) %>% # banyaknya laptop brand x
        aes(x = reorder(gender, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#F9D173') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="orange4", 
+                ), vjust = -0.5, size = 8, col="karyawane4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nGender", y = "Persentase (%)\n", 
        title = "\nSebaran Gender\n") +
@@ -198,7 +198,7 @@ ggplot(data = data %>% count(industry) %>% # banyaknya laptop brand x
        aes(x = reorder(industry, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#ACD694') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="orange4", 
+                ), vjust = -0.5, size = 8, col="karyawane4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nIndustry", y = "Persentase (%)\n", 
        title = "\nSebaran Industry\n") +
@@ -212,7 +212,7 @@ ggplot(data = data %>% count(profession) %>% # banyaknya laptop brand x
        aes(x = reorder(profession, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#9DD8D2') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="orange4", 
+                ), vjust = -0.5, size = 8, col="karyawane4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nProfession", y = "Persentase (%)\n", 
        title = "\nSebaran Profession\n") +
@@ -226,7 +226,7 @@ ggplot(data = data %>% count(greywage) %>% # banyaknya laptop brand x
        aes(x = reorder(greywage, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#9BC6EA') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="orange4", 
+                ), vjust = -0.5, size = 8, col="karyawane4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nGreywage", y = "Persentase (%)\n", 
        title = "\nSebaran Greywage\n") +
@@ -239,7 +239,7 @@ ggplot(data = data %>% count(way) %>% # banyaknya laptop brand x
        aes(x = reorder(way, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#D1BADA') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="orange4", 
+                ), vjust = -0.5, size = 8, col="karyawane4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nWay", y = "Persentase (%)\n", 
        title = "\nSebaran Way\n") +
@@ -251,7 +251,7 @@ plot_grid(c1, c3, c4, c2, c6, c7, c5, nrow=2 ,
                          1/2, 1/2, 1/2, 1))
 ```
 
-Proporsi Turnover pada `event` hampir sama, artinya tidak ada kecenderungan. Sebaran umur pada Turnover dan tidak Turnover, nampak serupa yakni menjulur ke kanan dengan median di umur 10. Pada industri terlihat bahwa Retail merupakan bidang pekerjaan yang mendominasi yakni sekitar 30% dari bidang pekerjaan lainnya. Sekitar 80% gender adalah perempuan. Sekitar 80% orang membayar pajaknya. Sekitar 60% orang menaiki bus. Dan profesi yang mendomiasi adalah HR yakni sekitar 60% lebih dari profesi lainnya.
+Proporsi Turnover pada `event` hampir sama, artinya tidak ada kecenderungan. Sebaran umur pada Turnover dan tidak Turnover, nampak serupa yakni menjulur ke kanan dengan median di umur 10. Pada industri terlihat bahwa Retail merupakan bidang pekerjaan yang mendominasi yakni sekitar 30% dari bidang pekerjaan lainnya. Sekitar 80% gender adalah perempuan. Sekitar 80% karyawan membayar pajaknya. Sekitar 60% karyawan menaiki bus. Dan profesi yang mendomiasi adalah HR yakni sekitar 60% lebih dari profesi lainnya.
 
 # **Analisis Regresi Logistik**
 
@@ -271,10 +271,14 @@ summary(model)
 
 **Model Regresi Logistik:** $$\begin{equation}\begin{aligned}\text{logit}[\pi(x)] &=\alpha -\beta_1 \text{ gender}_m -\beta_2 \text{ age} -\beta_3 \text{ greywage}_{white} + \beta_4 \text{ way}_{car} -\beta_5 \text{way}_{foot} \\ &=  0.528677 -0.090045 \text{ gender}_m -0.014385 \text{ age} -0.261378 \text{ greywage}_{white} \\ &+ 0.062163 \text{ way}_{car} -0.595413 \text{way}_{foot} \end{aligned}\end{equation}$$
 
-$age$ = usia karyawan
+Dimana :
 
-$genderm$ = bernilai 1 untuk male, 0 untuk female
+$\text{gender}_m$ = bernilai 1 untuk male, 0 untuk female
 
-$waycar$ = bernilai 1 untuk car, 0 untuk lainnya
+$\text{age}$ = usia karyawan
 
-$wayfoot$ = bernilai 1 untuk foot, 0 untuk lainnya
+$\text{ greywage}_{white}$ = bernilai 1 untuk Membayar Pajak (white), 0 untuk Tidak (grey)
+
+$\text{way}_{car}$ = bernilai 1 untuk car, 0 untuk lainnya
+
+$\text{way}_{foot}$ = bernilai 1 untuk foot, 0 untuk lainnya
