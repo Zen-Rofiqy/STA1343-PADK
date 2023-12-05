@@ -62,9 +62,34 @@ install_load("lmtest","car","plotrix","aod","ggplot2")
 
 Data yang digunakan adalah data sekunder yang terdiri dari 7 peubah dengan 1129 baris. Akan tetapi, dalam analisis ini hanya digunakan 4 peubah, yaitu *event* sebagai peubah respon, lalu *age, gender, dan way* sebagai peubah penjelas.
 
-| Peubah   | Keterangan             | Tipe Peubah                        |
-|----------|------------------------|------------------------------------|
-| *Event*  | Kejadian turnover      | Numerik (0 dan 1)                  |
-| *Age*    | Usia                   | Numerik                            |
-| *Gender* | Jenis kelamin          | Kategorik (*male* dan *female*)    |
-| *Way*    | Transportasi ke kantor | Kategorik (*bus, car,* dan *foot*) |
++-------------+------------------------+-----------------------------------------+
+| **Peubah**  | **Keterangan**         | **Tipe Peubah**                         |
++:===========:+:======================:+=========================================+
+| event (Y)   | Kejadian Turnover      | Kategorik (Biner)                       |
+|             |                        |                                         |
+|             |                        | 1 : Turnover                            |
+|             |                        |                                         |
+|             |                        | 0 : Tidak Turnover                      |
++-------------+------------------------+-----------------------------------------+
+| gender      | Jenis Kelamin          | Kategoriik                              |
+|             |                        |                                         |
+|             |                        | m : male (Pria)                         |
+|             |                        |                                         |
+|             |                        | f : female (Wanita)                     |
++-------------+------------------------+-----------------------------------------+
+| age         | Usia                   | Numerik                                 |
++-------------+------------------------+-----------------------------------------+
+| industry    | Bidang Pekerjaan       |                                         |
++-------------+------------------------+-----------------------------------------+
+| profession  | Profesi                |                                         |
++-------------+------------------------+-----------------------------------------+
+| greywage    | Membayar Pajak/Tidak   |                                         |
++-------------+------------------------+-----------------------------------------+
+| way         | Transportasi ke Kantor | Kategorik                               |
+|             |                        |                                         |
+|             |                        | bus : Naik Bus                          |
+|             |                        |                                         |
+|             |                        | car : Naik Mobil                        |
+|             |                        |                                         |
+|             |                        | foot : Jalan Kaki                       |
++-------------+------------------------+-----------------------------------------+
