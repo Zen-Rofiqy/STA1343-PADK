@@ -139,20 +139,6 @@ str(data)
 
 ## Eksplorasi data
 
-```{r message=FALSE, warning=FALSE}
-ggplot(data, aes(x=age, y=event, fill=event)) + geom_density_ridges() +
-  #COLORING
-  scale_fill_viridis(alpha = 0.75, #Opacity
-                     begin = 0.1, #Color pallte scale begins
-                     end = 0.9, #Color pallte scale ends
-                     direction = -1, #Flip color scale
-                     discrete = T, #Discrete Value
-                     option = "G") + #Color Palette
-  theme(plot.title = element_text(hjust=0.5),legend.position = "none") +
-  labs(x = "\nAge",y = "event(Y)\n", 
-       title = "Sebaran Age") + theme.sb.v
-```
-
 ```{r}
 theme.sb.v <- list(
   theme_minimal()  , 
@@ -260,7 +246,9 @@ ggplot(data = data %>% count(way) %>% # banyaknya laptop brand x
   scale_y_continuous(labels = scales::percent_format(scale = 1)) +
   theme.sb.v
 
-plot_grid(c1, c2, c3, c4, c5, c6, c7, nrow=2 , 
-          rel_widths = c(1, 1, 1, 1,
-                         1, 1, 1))
+plot_grid(c1, c3, c4, c2, c6, c7, c5, nrow=2 , 
+          rel_widths = c(1/2, 1, 1, 
+                         1/2, 1/2, 1/2, 1))
 ```
+
+Proporsi Turnover pada `event` hampir sama, artinya tidak ada kecenderungan. Sebaran umur pada Turnover dan tidak Turnover, nampak serupa yakni menjulur ke kanan dengan median di umur 10. Pada industri terlihat bahwa Retail merupakan bidang pekerjaan yang mendominasi yakni sekitar 30% dari bidang pekerjaan lainnya. Sekitar 80% gender adalah perempuan. Sekitar 80% orang membayar pajaknya. Sekitar 60% orang menaiki bus. Dan profesi yang mendomiasi adalah HR yakni sekitar 60% lebih dari profesi lainnya.
