@@ -111,8 +111,8 @@ Data yang digunakan adalah data sekunder yang terdiri dari 7 peubah dengan 1129 
 ## Data Entry
 
 ```{r}
-data <- import("https://raw.githubusercontent.com/Zen-Rofiqy/STA1343-PADK/main/Tugas/Tugas%20Praktikum%20Akhir/Data.csv")
-datatable(data)
+raw.data <- import("https://raw.githubusercontent.com/Zen-Rofiqy/STA1343-PADK/main/Tugas/Tugas%20Praktikum%20Akhir/Data.csv")
+datatable(raw.data)
 ```
 
 ## Data Checking {.tabset}
@@ -120,7 +120,7 @@ datatable(data)
 ### Data kosong
 
 ```{r}
-sum(is.na(data))
+sum(is.na(raw.data))
 ```
 
 Tidak ada data kosong.
@@ -128,15 +128,15 @@ Tidak ada data kosong.
 ### Tipe data
 
 ```{r}
-str(data)
+str(raw.data)
 ```
 
 > Mengubah tipe data
 
 ```{r}
-data <- data %>%
+data <- raw.data %>%
   mutate_all(~as.factor(.)) %>%
-  mutate(age = as.numeric(age))
+  mutate(age = raw.data$age)
 str(data)
 ```
 
@@ -258,7 +258,7 @@ ggsave("Eksplorasi.png", chart, path = export.chart,
         dpi = 300, height = 30, width = 70, limitsize = FALSE)
 ```
 
-Proporsi Turnover pada `event` hampir sama, artinya tidak ada kecenderungan. Sebaran umur pada Turnover dan tidak Turnover, nampak serupa yakni menjulur ke kanan dengan median di umur 10. Pada industri terlihat bahwa Retail merupakan bidang pekerjaan yang mendominasi yakni sekitar 30% dari bidang pekerjaan lainnya. Sekitar 80% gender adalah perempuan. Sekitar 80% karyawan membayar pajaknya. Sekitar 60% karyawan menaiki bus. Dan profesi yang mendomiasi adalah HR yakni sekitar 60% lebih dari profesi lainnya.
+Proporsi Turnover pada `event` hampir sama, artinya tidak ada kecenderungan. Sebaran umur pada Turnover dan tidak Turnover, nampak serupa yakni menjulur ke kanan dengan median di umur 25. Pada industri terlihat bahwa Retail merupakan bidang pekerjaan yang mendominasi yakni sekitar 30% dari bidang pekerjaan lainnya. Sekitar 80% gender adalah perempuan. Sekitar 80% karyawan membayar pajaknya. Sekitar 60% karyawan menaiki bus. Dan profesi yang mendomiasi adalah HR yakni sekitar 60% lebih dari profesi lainnya.
 
 # **Analisis Regresi Logistik**
 
@@ -278,7 +278,7 @@ model <- glm(event ~ gender+ age+ greywage+ way,
 summary(model)
 ```
 
-**Model Regresi Logistik:** $$\begin{equation}\begin{aligned}\text{logit}[\pi(x)] &=\alpha -\beta_1 \text{ gender}_m -\beta_2 \text{ age} -\beta_3 \text{ greywage}_{white} + \beta_4 \text{ way}_{car} -\beta_5 \text{way}_{foot} \\ &=  0.528677 -0.090045 \text{ gender}_m -0.014385 \text{ age} -0.261378 \text{ greywage}_{white} \\ &+ 0.062163 \text{ way}_{car} -0.595413 \text{way}_{foot} \end{aligned}\end{equation}$$
+**Model Regresi Logistik:** $$\begin{equation}\begin{aligned}\text{logit}[\pi(x)] &=\alpha -\beta_1 \text{ gender}_m -\beta_2 \text{ age} -\beta_3 \text{ greywage}_{white} + \beta_4 \text{ way}_{car} -\beta_5 \text{way}_{foot} \\ &=  0.792755 -0.090160 \text{ gender}_m -0.015213 \text{ age} -0.261899 \text{ greywage}_{white} \\ &+ 0.061397 \text{ way}_{car} -0.595150 \text{way}_{foot} \end{aligned}\end{equation}$$
 
 Dimana :
 
@@ -294,8 +294,6 @@ $\text{way}_{foot}$ = bernilai 1 untuk foot, 0 untuk lainnya
 
 ## Perhitungan Odds Rasio
 
-### Peubah Age
-
 ```{r}
 b1 <- summary(model)$coefficients[2,1]
 b2 <- summary(model)$coefficients[3,1]
@@ -304,55 +302,62 @@ b4 <- summary(model)$coefficients[5,1]
 b5 <- summary(model)$coefficients[6,1]
 ```
 
-$$exp(\beta_4)=OR=\frac{Odds(X=x+1)}{Odds(X=x)}$$
+$$exp(\beta_i)=OR=\frac{Odds(X=x_i+1)}{Odds(X=x_i)}$$
+
+### Peubah Gender (Male vs Female)
 
 ```{r}
-Odds_Age <- exp(b1)
-Odds_Age
+Odds_Male <- exp(b1)
+cat("OR(Male) :",Odds_Male)
 ```
 
-$OR=0.98517$
+> **Interpretasi**
 
-**Interpretasi:** Peluang terjadinya turnover karyawan akan menurun secara multiplikatif sebesar 0.98517 untuk setiap kenaikan 1 tahun usia karyawan.
+Untuk nilai peubah lainnya tetap, dugaan odds bagi seorang laki-laki untuk turnover adalah 0.9137849 kali dibanding wanita.
 
-### Peubah gender (Male vs Female)
+### Peubah Age
 
 ```{r}
-Odds_Male <- exp(b2)
-Odds_Male
+Odds_Age <- exp(b2)
+cat("OR(Age) :",Odds_Age)
 ```
 
-$Oddsratio(Pria)=0.9096122$
+> **Interpretasi**
 
-**Interpretasi:**
+Peluang terjadinya turnover karyawan akan menurun secara multiplikatif sebesar 0.984902 untuk setiap kenaikan 1 tahun usia karyawan.
 
-Untuk nilai peubah lainnya tetap, dugaan odds bagi seorang laki-laki untuk turnover adalah 0.9096122 kali dibanding wanita.
+### Peubah greywage (white vs grey)
+
+```{r}
+Odds_White <- exp(b3)
+cat("OR(White) :",Odds_White)
+```
+
+> **Interpretasi**
+
+Untuk nilai peubah lainnya tetap, dugaan odds bagi karyawan yang membayar pajak untuk turnover adalah 0.7699899 kali dibanding karyawan yang menggunakan tidak membayar pajak.
 
 ### Peubah Way (Car vs Bus)
 
 ```{r}
-Odds_Car <- exp(b3)
-Odds_Car
+Odds_Car <- exp(b4)
+cat("OR(Car) :", Odds_Car)
 ```
 
-$Oddsratio(Car)=1.06479$
+> **Interpretasi**
 
-**Interpretasi:**
-
-Untuk nilai peubah lainnya tetap, dugaan odds bagi karyawan yang menggunakan car untuk turnover adalah 1.06479 kali lebih besar dibanding karyawan yang menggunakan bus.
+Untuk nilai peubah lainnya tetap, dugaan odds bagi karyawan yang menggunakan car untuk turnover adalah 1.063321 kali lebih besar dibanding karyawan yang menggunakan bus.
 
 ### Peubah Way (Foot vs Bus)
 
 ```{r}
-Odds_Foot <- exp(b4)
-Odds_Foot
+Odds_Foot <- exp(b5)
+cat("OR(Foot) :", Odds_Foot)
 ```
 
-$Oddsratio(Foot)=0.5367517$
+> **Interpretasi**
 
-**Interpretasi:**
-
-Untuk nilai peubah lainnya tetap, dugaan odds bagi karyawan yang berjalan kaki untuk turnover adalah 0.5367517 kali dibanding karyawan yang menggunakan bus.
+Untuk nilai peubah lainnya tetap, dugaan odds bagi karyawan yang berjalan kaki untuk turnover adalah 0.5514796 kali dibanding karyawan yang menggunakan bus.
 
 ## Pendugaan peluang peubah kategorik
 
@@ -361,7 +366,7 @@ rataan_age <- mean(data$age)
 rataan_age
 ```
 
-Dalam pendugaan peluang peubah kategorik, peubah numerik dianggap konstan. Sehingga, peubah Age akan dianggap konstan dengan nilai rata-ratanya sebesar $31.06377$ atau 31 tahun.
+Dalam pendugaan peluang peubah kategorik, peubah numerik dianggap konstan. Sehingga, peubah Age akan dianggap konstan dengan nilai rata-ratanya sebesar $31.06696$ atau 31 tahun.
 
 Peluang peubah kategorik: $$\pi(x)=\frac{exp(logit[\pi(x)])}{1+exp(logit[\pi(x)])}$$
 
@@ -369,23 +374,22 @@ Peluang peubah kategorik: $$\pi(x)=\frac{exp(logit[\pi(x)])}{1+exp(logit[\pi(x)]
 p <- function(logit){
   exp(logit)/(1+exp(logit))
 }
-p <- function(logit){
-  exp(logit)/(1+exp(logit))
-}
 alpha <- summary(model)$coefficients[1,1]
-b1 <- summary(model)$coefficients[2,1]
-b2 <- summary(model)$coefficients[3,1]
-b3 <- summary(model)$coefficients[4,1]
-b4 <- summary(model)$coefficients[5,1]
-logit_x <- function(c1,c2,d){
-  alpha+b1*c1+b2*c2+b3*d+b4*rataan_age
+
+logit_x <- function(c1,c2,c3,c4){
+  alpha+b1*c1+b2*c2+b3*c3+b4*c4+b5*rataan_age
 }
 ```
 
 ```{r}
-Peubah <- c("Bus_Laki-laki","Bus_Wanita","Car_Laki-laki","Car_Wanita","Foot_Laki-laki","Foot_Wanita")
-Logit <- c(logit_x(0,0,1),logit_x(0,0,0),logit_x(1,0,1),logit_x(1,0,0),logit_x(0,1,1),logit_x(0,1,0))
-Peluang <- c(p(logit_x(0,0,1)),p(logit_x(0,0,0)),p(logit_x(1,0,1)),p(logit_x(1,0,0)),p(logit_x(0,1,1)),p(logit_x(0,1,0)))
+Peubah <- c("Bus_Laki-laki","Bus_Wanita","Car_Laki-laki","Car_Wanita",
+            "Foot_Laki-laki","Foot_Wanita")
+Logit <- c(logit_x(0,0,1),logit_x(0,0,0),
+           logit_x(1,0,1),logit_x(1,0,0),
+           logit_x(0,1,1),logit_x(0,1,0))
+Peluang <- c(p(logit_x(0,0,1)),p(logit_x(0,0,0)),
+             p(logit_x(1,0,1)),p(logit_x(1,0,0)),
+             p(logit_x(0,1,1)),p(logit_x(0,1,0)))
 Kejadian <- ifelse(Peluang>0.5,"Turnover","Tidak turnover")
 data.frame(Peubah, Logit, Peluang, Kejadian)
 ```
