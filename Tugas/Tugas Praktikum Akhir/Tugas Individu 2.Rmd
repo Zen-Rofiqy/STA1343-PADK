@@ -50,6 +50,9 @@ path <- function(){
 }
 #Copy path, Panggil function di console
 #Copy r path, paste ke var yang diinginkan
+
+#Export chart
+export.chart <- "C:/Users/Fathan/Documents/Obsidian Vault/2. Kuliah/Smt 5/7. Pengantar Analisis Data Kategorik/Tugas/Tugas Praktikum Akhir/Chart"
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -159,7 +162,7 @@ ggplot(data = data %>% count(event) %>% # banyaknya laptop brand x
        aes(x = reorder(event, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#F47F51') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="karyawane4", 
+                ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nevent(Y)", y = "Persentase (%)\n", 
        title = "\nSebaran event(Y)\n") +
@@ -172,7 +175,7 @@ ggplot(data = data %>% count(gender) %>% # banyaknya laptop brand x
        aes(x = reorder(gender, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#F9D173') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="karyawane4", 
+                ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nGender", y = "Persentase (%)\n", 
        title = "\nSebaran Gender\n") +
@@ -198,7 +201,7 @@ ggplot(data = data %>% count(industry) %>% # banyaknya laptop brand x
        aes(x = reorder(industry, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#ACD694') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="karyawane4", 
+                ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nIndustry", y = "Persentase (%)\n", 
        title = "\nSebaran Industry\n") +
@@ -212,7 +215,7 @@ ggplot(data = data %>% count(profession) %>% # banyaknya laptop brand x
        aes(x = reorder(profession, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#9DD8D2') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="karyawane4", 
+                ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nProfession", y = "Persentase (%)\n", 
        title = "\nSebaran Profession\n") +
@@ -226,7 +229,7 @@ ggplot(data = data %>% count(greywage) %>% # banyaknya laptop brand x
        aes(x = reorder(greywage, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#9BC6EA') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="karyawane4", 
+                ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nGreywage", y = "Persentase (%)\n", 
        title = "\nSebaran Greywage\n") +
@@ -239,21 +242,27 @@ ggplot(data = data %>% count(way) %>% # banyaknya laptop brand x
        aes(x = reorder(way, -n), y = perc)) +
   geom_bar(stat = "identity", fill='#D1BADA') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
-                ), vjust = -0.5, size = 8, col="karyawane4", 
+                ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
   labs(x = "\nWay", y = "Persentase (%)\n", 
        title = "\nSebaran Way\n") +
   scale_y_continuous(labels = scales::percent_format(scale = 1)) +
   theme.sb.v
 
+chart <-
 plot_grid(c1, c3, c4, c2, c6, c7, c5, nrow=2 , 
           rel_widths = c(1/2, 1, 1, 
                          1/2, 1/2, 1/2, 1))
+chart
+ggsave("Eksplorasi.png", chart, path = export.chart,
+        dpi = 300, height = 30, width = 70, limitsize = FALSE)
 ```
 
 Proporsi Turnover pada `event` hampir sama, artinya tidak ada kecenderungan. Sebaran umur pada Turnover dan tidak Turnover, nampak serupa yakni menjulur ke kanan dengan median di umur 10. Pada industri terlihat bahwa Retail merupakan bidang pekerjaan yang mendominasi yakni sekitar 30% dari bidang pekerjaan lainnya. Sekitar 80% gender adalah perempuan. Sekitar 80% karyawan membayar pajaknya. Sekitar 60% karyawan menaiki bus. Dan profesi yang mendomiasi adalah HR yakni sekitar 60% lebih dari profesi lainnya.
 
 # **Analisis Regresi Logistik**
+
+## Model
 
 ```{r}
 model <- glm(event ~ gender+ age+ industry+ profession+ greywage+ way, 
@@ -282,3 +291,143 @@ $\text{ greywage}_{white}$ = bernilai 1 untuk Membayar Pajak (white), 0 untuk Ti
 $\text{way}_{car}$ = bernilai 1 untuk car, 0 untuk lainnya
 
 $\text{way}_{foot}$ = bernilai 1 untuk foot, 0 untuk lainnya
+
+## Perhitungan Odds Rasio
+
+### Peubah Age
+
+```{r}
+b1 <- summary(model)$coefficients[2,1]
+b2 <- summary(model)$coefficients[3,1]
+b3 <- summary(model)$coefficients[4,1]
+b4 <- summary(model)$coefficients[5,1]
+b5 <- summary(model)$coefficients[6,1]
+```
+
+$$exp(\beta_4)=OR=\frac{Odds(X=x+1)}{Odds(X=x)}$$
+
+```{r}
+Odds_Age <- exp(b1)
+Odds_Age
+```
+
+$OR=0.98517$
+
+**Interpretasi:** Peluang terjadinya turnover karyawan akan menurun secara multiplikatif sebesar 0.98517 untuk setiap kenaikan 1 tahun usia karyawan.
+
+### Peubah gender (Male vs Female)
+
+```{r}
+Odds_Male <- exp(b2)
+Odds_Male
+```
+
+$Oddsratio(Pria)=0.9096122$
+
+**Interpretasi:**
+
+Untuk nilai peubah lainnya tetap, dugaan odds bagi seorang laki-laki untuk turnover adalah 0.9096122 kali dibanding wanita.
+
+### Peubah Way (Car vs Bus)
+
+```{r}
+Odds_Car <- exp(b3)
+Odds_Car
+```
+
+$Oddsratio(Car)=1.06479$
+
+**Interpretasi:**
+
+Untuk nilai peubah lainnya tetap, dugaan odds bagi karyawan yang menggunakan car untuk turnover adalah 1.06479 kali lebih besar dibanding karyawan yang menggunakan bus.
+
+### Peubah Way (Foot vs Bus)
+
+```{r}
+Odds_Foot <- exp(b4)
+Odds_Foot
+```
+
+$Oddsratio(Foot)=0.5367517$
+
+**Interpretasi:**
+
+Untuk nilai peubah lainnya tetap, dugaan odds bagi karyawan yang berjalan kaki untuk turnover adalah 0.5367517 kali dibanding karyawan yang menggunakan bus.
+
+## Pendugaan peluang peubah kategorik
+
+```{r}
+rataan_age <- mean(data$age)
+rataan_age
+```
+
+Dalam pendugaan peluang peubah kategorik, peubah numerik dianggap konstan. Sehingga, peubah Age akan dianggap konstan dengan nilai rata-ratanya sebesar $31.06377$ atau 31 tahun.
+
+Peluang peubah kategorik: $$\pi(x)=\frac{exp(logit[\pi(x)])}{1+exp(logit[\pi(x)])}$$
+
+```{r}
+p <- function(logit){
+  exp(logit)/(1+exp(logit))
+}
+p <- function(logit){
+  exp(logit)/(1+exp(logit))
+}
+alpha <- summary(model)$coefficients[1,1]
+b1 <- summary(model)$coefficients[2,1]
+b2 <- summary(model)$coefficients[3,1]
+b3 <- summary(model)$coefficients[4,1]
+b4 <- summary(model)$coefficients[5,1]
+logit_x <- function(c1,c2,d){
+  alpha+b1*c1+b2*c2+b3*d+b4*rataan_age
+}
+```
+
+```{r}
+Peubah <- c("Bus_Laki-laki","Bus_Wanita","Car_Laki-laki","Car_Wanita","Foot_Laki-laki","Foot_Wanita")
+Logit <- c(logit_x(0,0,1),logit_x(0,0,0),logit_x(1,0,1),logit_x(1,0,0),logit_x(0,1,1),logit_x(0,1,0))
+Peluang <- c(p(logit_x(0,0,1)),p(logit_x(0,0,0)),p(logit_x(1,0,1)),p(logit_x(1,0,0)),p(logit_x(0,1,1)),p(logit_x(0,1,0)))
+Kejadian <- ifelse(Peluang>0.5,"Turnover","Tidak turnover")
+data.frame(Peubah, Logit, Peluang, Kejadian)
+```
+
+Berdasarkan perhitungan di atas, dapat diketahui bahwa pada umur 31 tahun baik pria maupun wanita memiliki peluang untuk tidak turnover.
+
+## Uji Simultan
+
+$H_0: \beta_1=\beta_2=\beta_3=\beta_4=0$ $H_1:$ minimal ada satu $\beta_i\neq0$
+
+```{r}
+# Likelihood ratio test
+lrtest(model)
+```
+
+Berdasarkan Likelihood ratio test, didapat *p-value* sebesar 0.008487 yang lebih kecil dari taraf nyata 5% sehingga tolak $H_0$. Dapat disimpulkan bahwa secara bersama-sama peubah way, age, dan gender berpengaruh signifikan terhadap terjadinya kejadian turnover pada taraf nyata 5%.
+
+## Uji Parsial
+
+Menggunakan Uji Wald Hipotesis: $H_0:\beta_i=0$ $H_1:\beta_i\neq0$
+
+```{r}
+# Age
+wald.test(Sigma =vcov(model), b = coef(model),Terms = 2)
+```
+
+$p-value=0.5>\alpha=0.05$, Tak Tolak $H_0$
+
+```{r}
+# Gender
+wald.test(Sigma =vcov(model), b = coef(model),Terms = 3)
+```
+
+$p-value=0.84>\alpha=0.084$, Tak Tolak $H_0$
+
+```{r}
+# Way
+wald.test(Sigma =vcov(model), b = coef(model),Terms = 4:5)
+```
+
+$p-value=0.0058<\alpha=0.05$, Tolak $H_0$ Dapat disimpulkan bahwa hanya penduga koefisien way yang berpengaruh signifikan terhadap perolehan nilai model.
+
+# Kesimpulan
+
+Wanita cenderung memiliki peluang yang tinggi untuk mengalami turnover daripada laki-laki. Jika dilihat berdasarkan peubah way, karyawan yang berangkat menggunakan mobil dan bus memiliki kesempatan turnover lebih tinggi daripada karyawan yang berjalan kaki ke perusahaannya.
