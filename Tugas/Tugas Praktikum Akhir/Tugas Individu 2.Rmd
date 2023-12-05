@@ -153,9 +153,9 @@ theme.sb.v <- list(
 )
 ```
 
-```{r fig.align="center", fig.height=30, fig.width=70, message=FALSE, warning=FALSE, dpi=300, error=FALSE}
+```{r fig.align="center", fig.height=30, fig.width=70, message=FALSE, warning=FALSE, dpi=150, error=FALSE}
 install_load('ggridges','cowplot')
-
+dev.off()
 c1 <-
 ggplot(data = data %>% count(event) %>% # banyaknya laptop brand x
   mutate(perc = round(n / sum(n) * 100)), #buat persentase
@@ -255,7 +255,7 @@ plot_grid(c1, c3, c4, c2, c6, c7, c5, nrow=2 ,
                          1/2, 1/2, 1/2, 1))
 chart
 ggsave("Eksplorasi.png", chart, path = export.chart,
-        dpi = 300, height = 30, width = 70, limitsize = FALSE)
+        dpi = 150, height = 30, width = 70, limitsize = FALSE)
 ```
 
 Proporsi Turnover pada `event` hampir sama, artinya tidak ada kecenderungan. Sebaran umur pada Turnover dan tidak Turnover, nampak serupa yakni menjulur ke kanan dengan median di umur 25. Pada industri terlihat bahwa Retail merupakan bidang pekerjaan yang mendominasi yakni sekitar 30% dari bidang pekerjaan lainnya. Sekitar 80% gender adalah perempuan. Sekitar 80% karyawan membayar pajaknya. Sekitar 60% karyawan menaiki bus. Dan profesi yang mendomiasi adalah HR yakni sekitar 60% lebih dari profesi lainnya.
@@ -418,7 +418,7 @@ Menggunakan Uji Wald Hipotesis: $H_0:\beta_i=0$ $H_1:\beta_i\neq0$
 # Gender
 wald.test(Sigma =vcov(model), b = coef(model),Terms = 2)[["result"]][["chi2"]][["P"]] -> 
   wald
-if(wald.gender < 0.05){
+if(wald < 0.05){
   cat("p.value =", wald, "\nTolak H0")
 } else {
   cat("p.value =", wald, "\nTak Tolak Ho")
@@ -430,7 +430,7 @@ if(wald.gender < 0.05){
 ```{r}
 wald.test(Sigma =vcov(model), b = coef(model),Terms = 3)[["result"]][["chi2"]][["P"]] -> 
   wald
-if(wald.gender < 0.05){
+if(wald < 0.05){
   cat("p.value =", wald, "\nTolak H0")
 } else {
   cat("p.value =", wald, "\nTak Tolak Ho")
@@ -442,7 +442,7 @@ if(wald.gender < 0.05){
 ```{r}
 wald.test(Sigma =vcov(model), b = coef(model),Terms = 4)[["result"]][["chi2"]][["P"]] -> 
   wald
-if(wald.gender < 0.05){
+if(wald < 0.05){
   cat("p.value =", wald, "\nTolak H0")
 } else {
   cat("p.value =", wald, "\nTak Tolak Ho")
@@ -454,7 +454,7 @@ if(wald.gender < 0.05){
 ```{r}
 wald.test(Sigma =vcov(model), b = coef(model),Terms = 5)[["result"]][["chi2"]][["P"]] -> 
   wald
-if(wald.gender < 0.05){
+if(wald < 0.05){
   cat("p.value =", wald, "\nTolak H0")
 } else {
   cat("p.value =", wald, "\nTak Tolak Ho")
@@ -466,7 +466,7 @@ if(wald.gender < 0.05){
 ```{r}
 wald.test(Sigma =vcov(model), b = coef(model),Terms = 6)[["result"]][["chi2"]][["P"]] -> 
   wald
-if(wald.gender < 0.05){
+if(wald < 0.05){
   cat("p.value =", wald, "\nTolak H0")
 } else {
   cat("p.value =", wald, "\nTak Tolak Ho")
