@@ -171,7 +171,7 @@ c1 <-
 ggplot(data = data %>% count(event) %>% # banyaknya laptop brand x
   mutate(perc = round(n / sum(n) * 100)), #buat persentase
        aes(x = reorder(event, -n), y = perc)) +
-  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_bar(stat = "identity", fill='#F47F51') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
                 ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
@@ -184,7 +184,7 @@ c2 <-
 ggplot(data = data %>% count(gender) %>% # banyaknya laptop brand x
   mutate(perc = round(n / sum(n) * 100)), #buat persentase
        aes(x = reorder(gender, -n), y = perc)) +
-  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_bar(stat = "identity", fill='#F9D173') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
                 ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
@@ -210,7 +210,7 @@ c4 <-
 ggplot(data = data %>% count(industry) %>% # banyaknya laptop brand x
   mutate(perc = round(n / sum(n) * 100)), #buat persentase
        aes(x = reorder(industry, -n), y = perc)) +
-  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_bar(stat = "identity", fill='#ACD694') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
                 ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
@@ -224,7 +224,7 @@ c5 <-
 ggplot(data = data %>% count(profession) %>% # banyaknya laptop brand x
   mutate(perc = round(n / sum(n) * 100)), #buat persentase
        aes(x = reorder(profession, -n), y = perc)) +
-  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_bar(stat = "identity", fill='#9DD8D2') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
                 ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
@@ -238,7 +238,7 @@ c6 <-
 ggplot(data = data %>% count(greywage) %>% # banyaknya laptop brand x
   mutate(perc = round(n / sum(n) * 100)), #buat persentase
        aes(x = reorder(greywage, -n), y = perc)) +
-  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_bar(stat = "identity", fill='#9BC6EA') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
                 ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
@@ -251,7 +251,7 @@ c7 <-
 ggplot(data = data %>% count(way) %>% # banyaknya laptop brand x
   mutate(perc = round(n / sum(n) * 100)), #buat persentase
        aes(x = reorder(way, -n), y = perc)) +
-  geom_bar(stat = "identity", fill='#2D99AE') +
+  geom_bar(stat = "identity", fill='#D1BADA') +
   geom_text(aes(label = prettyNum(n,big.mark = ",")
                 ), vjust = -0.5, size = 8, col="orange4", 
             fontface = "bold") + # Tambahkan label
