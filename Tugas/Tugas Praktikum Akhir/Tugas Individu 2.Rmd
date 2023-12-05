@@ -137,7 +137,7 @@ data <- data %>%
 str(data)
 ```
 
-## Eksplorasi data
+# Eksplorasi data
 
 ```{r}
 theme.sb.v <- list(
@@ -252,3 +252,19 @@ plot_grid(c1, c3, c4, c2, c6, c7, c5, nrow=2 ,
 ```
 
 Proporsi Turnover pada `event` hampir sama, artinya tidak ada kecenderungan. Sebaran umur pada Turnover dan tidak Turnover, nampak serupa yakni menjulur ke kanan dengan median di umur 10. Pada industri terlihat bahwa Retail merupakan bidang pekerjaan yang mendominasi yakni sekitar 30% dari bidang pekerjaan lainnya. Sekitar 80% gender adalah perempuan. Sekitar 80% orang membayar pajaknya. Sekitar 60% orang menaiki bus. Dan profesi yang mendomiasi adalah HR yakni sekitar 60% lebih dari profesi lainnya.
+
+# **Analisis Regresi Logistik**
+
+```{r}
+model <- glm(event ~ gender+ age+ industry+ profession+ greywage+ way, 
+             data=data, family=binomial(link="logit"))
+summary(model)
+```
+
+Terlalu banyak X. Sehingga saya memilih gender, age, greywage, dan way saja.
+
+```{r}
+model <- glm(event ~ gender+ age+ greywage+ way, 
+             data=data, family=binomial(link="logit"))
+summary(model)
+```
