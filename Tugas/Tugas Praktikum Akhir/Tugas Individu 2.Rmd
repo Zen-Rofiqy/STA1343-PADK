@@ -51,3 +51,20 @@ path <- function(){
 #Copy path, Panggil function di console
 #Copy r path, paste ke var yang diinginkan
 ```
+
+```{r}
+install_load("lmtest","car","plotrix","aod","ggplot2")
+```
+
+# Pendahuluan
+
+## Data
+
+Data yang digunakan adalah data sekunder yang terdiri dari 7 peubah dengan 1129 baris. Akan tetapi, dalam analisis ini hanya digunakan 4 peubah, yaitu *event* sebagai peubah respon, lalu *age, gender, dan way* sebagai peubah penjelas.
+
+| Peubah   | Keterangan             | Tipe Peubah                        |
+|----------|------------------------|------------------------------------|
+| *Event*  | Kejadian turnover      | Numerik (0 dan 1)                  |
+| *Age*    | Usia                   | Numerik                            |
+| *Gender* | Jenis kelamin          | Kategorik (*male* dan *female*)    |
+| *Way*    | Transportasi ke kantor | Kategorik (*bus, car,* dan *foot*) |
