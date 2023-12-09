@@ -98,7 +98,7 @@ data2 <- data %>%
                names_to = "LungCancer", values_to = "Count") %>%
   mutate(LungCancer = ifelse(str_detect(LungCancer, "Yes"), "Yes", "No")) %>%
   uncount(weights = Count) %>%
-  select(City, Smoking, LungCancer) %>%
+  dplyr::select(City, Smoking, LungCancer) %>%
   mutate(
     City = as.factor(City),
     Smoking = as.factor(Smoking),
@@ -248,15 +248,14 @@ Pada dua sofware lainnya memiliki kesimpulan yang sama walaupun nilainya cukup b
 > **Kota** yang memilikipengaruh yang **signifikan**
 
 ```{r}
-model2 <- glm(LungCancer ~ City, data = data2, family = binomial)
-summary(model2)
+summary(model)
 ```
 
 Bisa dilihat pada bagian
 
 ![](images/Screenshot%202023-11-17%20065957.png){width="342"}
 
-Bahwa **Kota yang memiliki pengaruh yang signifikan** adalah kota **Taiyuan.**
+Bahwa **Kota yang memiliki pengaruh yang signifikan** pada taraf nyata $5\%$ adalah kota **Taiyuan** dan kota **Beijing** (Intercept, karena sebagai peubah referensi).
 
 Untuk No 4, hanya bisa dilakukan di **Rstudio** saja.
 
@@ -278,7 +277,7 @@ Untuk No 4, hanya bisa dilakukan di **Rstudio** saja.
 
 ```{r message=FALSE, warning=FALSE}
 install_load("ResourceSelection")
-hoslem <- hoslem.test(model$y, fitted(model)); hoslem
+hoslem <- hoslem.test(model$y, fitted(model), g = 10); hoslem
 ```
 
 Didapatkan *Khi-kuadrat* sebesar $1.388$. Nilainya sangat kecil, sehingga dapat dinyatakan **kurang dari** $0.001$. Didapat pula *p-value* yang besar yakni sebesar $0.9944$. Karena *p-value* **lebih besar** dari taraf nyata $5\%$, maka **Tak Tolak** $H_0$. Artinya **Model** yang digunakan sudah **cocok.**
@@ -373,6 +372,8 @@ datatable(log)
 ```
 
 Diperoleh nilai $log{(\text{L}_0^{-2})}$ adalah sebesar $11663.37$. Lalu $log{(\text{L}_1^{-2})}$ bernilai $11357.67$. Dan $log{(\text{L}_0-\text{L}_1)^{-2}}$ sebesar $305.7$.
+
+Untuk No 6, hanya bisa dilakukan di **Rstudio** saja.
 
 > Sehingga jawaban yang tepat adalah
 
